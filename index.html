@@ -48,7 +48,7 @@
                 <select class="form-select input-select">
                     <option id="from-l">Select Origin</option>
                     <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
+                    <option value="Chiang Mai">Don Muaeng</option>
                     <option value="Chiang Mai">Chiang Mai</option>
                     <option value="Chiang Mai">Chiang Mai</option>
                 </select>
@@ -58,14 +58,14 @@
                 <select class="form-select input-select">
                     <option id="to-d">Select Destination</option>
                     <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
+                    <option value="Chiang Mai">Don Muaeng</option>
                     <option value="Chiang Mai">Chiang Mai</option>
                     <option value="Chiang Mai">Chiang Mai</option>
                 </select>
             </div>
             <div class="select-depart">
                 <label class="desc-label">Depart</label>
-                <input 
+                <!-- <input 
                     onChange={handleDepartureDateChange} 
                     value={departureDate} 
                     type="date" 
@@ -73,11 +73,17 @@
                     id="departure_date" 
                     min="2024-03-06"
                     class="form-select input-select" 
-                />
+                /> -->
+                <input type="date" 
+                       id="departure_date" 
+                       name="departure_date" 
+                       value={getCurrentDate()}
+                       min="{getCurrentDate()}"
+                       class="form-select input-select" />
             </div>
             <div class="select-return">
                 <label class="desc-label">Return</label>
-                <input 
+                <!-- <input 
                     onChange={handleDepartureDateChange} 
                     value={returnDate} 
                     type="date" 
@@ -85,7 +91,12 @@
                     id="return_date" 
                     min="2024-03-06"
                     class="form-select input-select"
-                />
+                /> -->
+                <input type="date" id="return_date" 
+                       name="return_date" 
+                       value={returnDate} 
+                       min="getCurrentDate()" 
+                       class="form-select input-select" />
             </div>
             <div class="select-passengers">
                 <label class="desc-label">Select passengers</label>

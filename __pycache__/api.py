@@ -18,7 +18,8 @@ app.add_middleware(
 #junior add
 @app.get("/select_ticket")
 async def check_in(booking_ref:str, last_name:str):
-    return {"type":"depart","data":"1"},{"type":"return","data":"2"}
+    return {"type":"depart","date":"01-01-2000", "flight number":"ABC", "Aircraft":"101", "from":"bangkok","to":"chaingm mai", "depart time":"08:00","arrival time":"10:00"},
+            {"type":"return","date":"02-01-2000", "flight number":"ZXC", "Aircraft":"122", "from":"chaing mai","to":"bangkok", "depart time":"12:00","arrival time":"14:00"}
 
 @app.get("/flight_instance_matches", tags=["1: Show + Get Flight Instance Matches"])
 def get_flight_instances_matches(froml : str, to : str, depart_date : str, return_date : Optional[str] = None):
