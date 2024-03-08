@@ -48,26 +48,26 @@ class AirportSystem:
 
         for flight_instance in self.__flight_instance_list:
             if flight_instance.starting_location.name == starting_location and flight_instance.destination.name == destination and flight_instance.date == date_depart:
-                flight_instance_info = {"starting_location": starting_location,
-                                        "destination" : destination,
-                                        "departure_time": flight_instance.departure_time,
-                                        "arrival_time": flight_instance.arrival_time,
-                                        "flight_number": flight_instance.flight_number,
-                                        "aircraft_number": flight_instance.aircraft.aircraft_number,
-                                        "cost": flight_instance.cost}
+                flight_instance_info = {"depart_starting_location": starting_location,
+                                        "depart_destination" : destination,
+                                        "depart_departure_time": flight_instance.departure_time,
+                                        "depart_arrival_time": flight_instance.arrival_time,
+                                        "depart_flight_number": flight_instance.flight_number,
+                                        "depart_aircraft_number": flight_instance.aircraft.aircraft_number,
+                                        "depart_cost": flight_instance.cost}
                 
                 departing_flight_instance.append(flight_instance_info)
 
         if date_return != None:
             for flight_instance in self.__flight_instance_list:
                 if flight_instance.destination.name == starting_location and flight_instance.starting_location.name == destination and flight_instance.date == date_return:
-                    flight_instance_info = {"starting_location": destination,
-                                            "destination": starting_location,
-                                            "departure_time": flight_instance.departure_time,
-                                            "arrival_time": flight_instance.arrival_time,
-                                            "flight_number": flight_instance.flight_number,
-                                            "aircraft_number": flight_instance.aircraft.aircraft_number,
-                                            "cost": flight_instance.cost}
+                    flight_instance_info = {"return_starting_location": destination,
+                                            "return_destination": starting_location,
+                                            "return_departure_time": flight_instance.departure_time,
+                                            "return_arrival_time": flight_instance.arrival_time,
+                                            "return_flight_number": flight_instance.flight_number,
+                                            "return_aircraft_number": flight_instance.aircraft.aircraft_number,
+                                            "return_cost": flight_instance.cost}
 
                     returning_flight_instance.append(flight_instance_info)
 
@@ -269,12 +269,17 @@ nokair = AirportSystem()
 nokair.airport_list.append(Airport("Don Mueang", "DMK"))
 nokair.airport_list.append(Airport("Chiang Mai", "CNX"))
 nokair.flight_list.append(Flight(nokair.airport_list[0], nokair.airport_list[1], "ABC"))
-nokair.flight_list.append(Flight(nokair.airport_list[1], nokair.airport_list[0], "ABC"))
+nokair.flight_list.append(Flight(nokair.airport_list[1], nokair.airport_list[0], "BCD"))
 
 # change date format
 nokair.aircraft_list.append(Aircraft("101"))
 nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "10:00", "12:00", nokair.aircraft_list[0], "2024-03-08", 1000))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "10:00", "12:00", nokair.aircraft_list[0], "2024-03-09", 1000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "11:00", "13:00", nokair.aircraft_list[0], "2024-03-08", 1200))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "12:00", "14:00", nokair.aircraft_list[0], "2024-03-08", 1500))
+
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "10:30", "12:30", nokair.aircraft_list[0], "2024-03-09", 2000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "11:30", "13:30", nokair.aircraft_list[0], "2024-03-09", 2200))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "12:30", "14:30", nokair.aircraft_list[0], "2024-03-09", 2500))
 
 nokair.service_list = Insurance("Insurance", 100)
 nokair.service_list = Baggage("+5kg Baggage", 100, 5)

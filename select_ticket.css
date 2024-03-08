@@ -1,0 +1,15 @@
+.navbar {
+      background-color: #ffcb0b;
+      padding-left: 120px;
+      height: 80px;
+  }
+
+
+.select-ticket-label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 1.8rem;
+  }

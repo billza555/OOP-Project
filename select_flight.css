@@ -47,20 +47,26 @@
 }
 
 .flight-detail {
-    background-color: #fff;
+    background-color: #000;
     display: flex;
-    margin-top: 20px;
     font-size: 1.4rem;
     font-weight: 500;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 25px;
+    justify-content:space-around;
+}
+
+.depart-time-label, .arrive-time-label, .flight-number-label, .aircraft_number-label, .cost-label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
 }
 
 .flight-detail-item {
     width: 175px;
     height: 40px;
     padding: 5px;
-    margin-left: 50px;
 }
 
 .return-container {
@@ -84,4 +90,34 @@
 .next-btns {
     width: 100px;
     height: 40px;
+}
+
+.flight-detail-each-item, .flight-return-detail-each-item {
+    /* background-color: cadetblue; */
+    padding: 20px;
+}
+
+.flight-detail-each-item div, .flight-return-detail-each-item div {
+    /* background-color:orangered;*/
+    background-color: #fff;
+    display: flex;
+    margin-top: 20px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 25px;
+    justify-content:space-around;
+}
+
+.flight-detail-each-item .btn , .flight-return-detail-each-item .btn{
+    /* background-color: black; */
+    background-color: greenyellow;
+    padding: 10px;
+    margin-right: -30px;
+    border: none;
+    border-radius: 15px;
+}
+
+.flight-detail-items-i {
+    color: #000;
 }
