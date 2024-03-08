@@ -4,6 +4,7 @@ const api = "http://127.0.0.1:8000";
 document.addEventListener('DOMContentLoaded', function () {
     const booking_ref_data = JSON.parse(localStorage.getItem('booking_ref'));
     const last_name_data = JSON.parse(localStorage.getItem('last_name'));
+    console.log(booking_ref_data,last_name_data)
     handleSelectTicketPageData(booking_ref_data, last_name_data);
 });
 
@@ -18,18 +19,38 @@ async function handleSelectTicketPageData(booking_ref_data, last_name_data) {
         const response_data = await response.json();
         console.log(response_data);
 
-        const response_container = document.getElementById('response_container');
+        const container = document.getElementById('response_container');
 
-        response_data.forEach((data, index) => {
-        const response_element = document.createElement('p');
-        response_element.innerText = `Data ${index + 1}: ${data.someProperty}`;
-        response_container.appendChild(response_element);
+        response_data.forEach(data => {
+            const element = document.createElement("div");
+            element.innerHTML = `
+            <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                        <h5 class="card-title">${data.type}</h5>
+                        <p>From: ${data.from}</p>
+                        <p>To: ${data.to}</p>
+                        <p>Date: ${data.date}</p>
+                        <p>Flight Number: ${data["flight number"]}</p>
+                        <p>Aircraft: ${data.Aircraft}</p>
+                        <p>Depart Time: ${data["depart time"]}</p>
+                        <p>Arrival Time: ${data["arrival time"]}</p>
+                        <a href="#" class="btn btn-primary" onclick="go_to_get_bording_pass('${data["flight number"]}','${data.type}')">Get Boarding Pass</a>
+                  </div>
+            </div>
+            `;
+            container.appendChild(element);
+          });
         
-    });
+            
 
     } catch (error) {
         console.error('Error:', error);
     }
 
-    
+}
+
+function go_to_get_bording_pass(flight_number,type) {
+      localStorage.setItem('type', JSON.stringify(type));
+
+      document.location.href = "boarding_pass.html";
 }
