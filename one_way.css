@@ -21,7 +21,7 @@
     padding-left: 120px;
 }
 
-.container {
+.container-one-way {
     margin: 130px;
     background-color: #ffcb0b;
     height: 350px;
@@ -44,8 +44,8 @@
 }
 
 .flight-input {
+    margin: 35px 60px 20px 60px;
     display: flex;
-    margin: 35px 20px 20px 20px;
     justify-content: space-between;
 }
 

@@ -7,9 +7,6 @@ async function click_check_in() {
 
           localStorage.setItem('booking_ref', JSON.stringify(booking_ref));
           localStorage.setItem('last_name', JSON.stringify(last_name));
-
-          console.log(typeof(booking_ref))
-          console.log(typeof(last_name))
           
           document.location.href = "select_ticket.html";
 

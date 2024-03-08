@@ -6,7 +6,7 @@
     <title>tam bye</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="one_way.css">
 </head>
 <body>
 
@@ -43,40 +43,34 @@
             </div>
         </div>
         <div class="flight-input-one-way">
-            <div class="select-from">
-                <label class="desc-label">From</label>
-                <select class="form-select one-way">
-                    <option>Select Origin</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
-                </select>
-            </div>
-            <div class="select-to">
-                <label class="desc-label">To</label>
-                <select class="form-select one-way">
-                    <option value="">Select Destination</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Chiang Mai">Chiang Mai</option>
-                </select>
-            </div>
-            <div class="select-depart">
-                <label class="desc-label">Depart</label>
-                <input
-                    onChange={handleReturnDateChange}
-                    value={returnDate}  // Remove curly braces here
-                    type="date"
-                    name="return_date"
-                    id="return_date"
-                    min={getCurrentDate()}  
-                    className="form-select one-way"/>
-            </div>
-            <div class="select-passengers">
-                <label class="desc-label">Select passengers</label>
-                <input type="" class="form-control one-way" placeholder="Select passengers">
+            <div class="flight-input">
+                <div class="select-from">
+                    <label class="desc-label">From</label>
+                    <select class="form-select input-select" id="from_select">
+                        <option value="Chiang Mai">Chiang Mai</option>
+                        <option value="Don Mueang">Don Mueang</option>
+                        <!-- Add more -->
+                    </select>
+                </div>
+                
+                <div class="select-to">
+                    <label class="desc-label">To</label>
+                    <select class="form-select input-select" id="to_select">
+                        <option value="Chiang Mai">Chiang Mai</option>
+                        <option value="Don Mueang">Don Mueang</option>
+                        <!-- Add more -->
+                    </select>
+                </div>
+                <div class="select-depart">
+                    <label class="desc-label">Depart</label>
+                    <input type="date" 
+                        id="departure_date" 
+                        class="form-select input-select" />
+                </div>
+                <div class="select-passengers">
+                    <label class="desc-label">Select passengers</label>
+                    <input type="email" class="form-control input-select" placeholder="Select passengers">
+                </div>
             </div>
         </div>
         <div class="submit">
