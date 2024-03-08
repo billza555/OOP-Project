@@ -8,6 +8,7 @@ async function search_flight() {
             const input_to = toSelect.options[toSelect.selectedIndex].textContent;
             const input_depart_date = document.getElementById("departure_date").value;
             const input_return_date = document.getElementById("return_date").value;
+            const len_passenger = document.getElementById("passenger_amount")
 
           
   
@@ -15,6 +16,7 @@ async function search_flight() {
             localStorage.setItem('input_to', JSON.stringify(input_to));
             localStorage.setItem('input_depart_date', JSON.stringify(input_depart_date));
             localStorage.setItem('input_return_date', JSON.stringify(input_return_date));
+            localStorage.setItem('len_passenger'), JSON.stringify(len_passenger)
     
             document.location.href = "select_flight.html";
   
