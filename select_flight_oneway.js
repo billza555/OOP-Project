@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 async function get_all_flight(from, to, date) {
       
       try {
-            const response = await fetch(`${api}/flight_instance_matches?froml=${from}&to=${to}&depart_date=${date}&return_date=""`);
+            const response = await fetch(`${api}/flight_instance_matches?starting_location=${from}&destination=${to}&depart_date=${date}&return_date=""`);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }

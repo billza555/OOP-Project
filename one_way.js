@@ -1,6 +1,6 @@
 const api = "http://127.0.0.1:8000";
 
-async function search_flight() {
+async function search_flights() {
     try {
           const from = document.getElementById("from_select").value;
           const to = document.getElementById("to_select").value;
