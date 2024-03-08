@@ -27,8 +27,9 @@ async def get_boarding_pass(booking_ref:str, last_name:str, type:str):
 
 @app.get("/flight_instance_matches", tags=["Show + Get Flight Instance Matches"])
 def get_flight_instances_matches(starting_location : str, destination : str, depart_date : str, return_date : Optional[str] = None):
-    flight_instance_matches = nokair.get_flight_instance_matches(starting_location, destination, depart_date, return_date)
-    return json.dumps(flight_instance_matches)
+    # flight_instance_matches = nokair.get_flight_instance_matches(starting_location, destination, depart_date, return_date)
+    # return json.dumps(flight_instance_matches)
+    return nokair.get_flight_instance_matches(starting_location, destination, depart_date, return_date)
 
 @app.get("/get_all_seats", tags=["Show + Get Flight Instance Matches"])
 def get_all_seats(flight_number : str, date : str):

@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function show_flight(new_input_from, new_input_to, new_input_depart_date, new_input_return_date) {
     try {
-        const response = await fetch(`${api}/flight_instance_matches?froml=${new_input_from}&to=${new_input_to}&depart_date=${new_input_depart_date}&return_date=${new_input_return_date}`);
+        const response = await fetch(`${api}/flight_instance_matches?starting_location=${new_input_from}&destination=${new_input_to}&depart_date=${new_input_depart_date}&return_date=${new_input_return_date}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -125,9 +125,8 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
     }
 }
 
-const depart_data = [];
-const return_data = [];
-const select_data = [...depart_data, ...return_data];
+let depart_data = [];
+let return_data = [];
 
 function selectFile(type, index, button) {
     const flightDetails = {
@@ -135,31 +134,41 @@ function selectFile(type, index, button) {
         arrival_time: button.parentNode.querySelector('.arrive-time-label').textContent,
         flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
         aircraft_number: button.parentNode.querySelector('.aircraft_number-label').textContent,
-        cost: button.textContent.split(' ')[0]
+        cost: button.textContent.split(' ')[0] // Extracting cost value
     };
 
-    if (type === 'depart') 
-        if (depart_data.length > 0) 
+    if (type === 'depart') {
+        if (depart_data.length > 0) {
             depart_data[0] = flightDetails;
-        else 
+        } else {
             depart_data.push(flightDetails);
-        
-    if (type === 'return') 
-        if (return_data.length > 0) 
+        }
+    }
+
+    if (type === 'return') {
+        if (return_data.length > 0) {
             return_data[0] = flightDetails;
-        else
+        } else {
             return_data.push(flightDetails);
+        }
+    }
+
+    const select_data = [...depart_data, ...return_data];
 
     console.log("Depart : ", depart_data);
     console.log("Return : ", return_data);
     console.log("Selected : ", select_data);
 
-    // localStorage.setItem('select_flight', JSON.stringify(type));
+    localStorage.setItem('select_flight', JSON.stringify(select_data));
+
 }
 
-function to_passengers_fill(select_data) {
+function to_passengers_fill() {
 
-    console.log("Select Flight : ", select_data)
-    localStorage.setItem('select_flight', JSON.stringify(select_data));
-    
+    const select_flight_data = JSON.parse(localStorage.getItem('select_flight'));
+    console.log("Select Flight : ", select_flight_data)
+    localStorage.setItem('select_flight', JSON.stringify(select_flight_data));
+
+    document.location.href = "fill_passengers_info.html";
+
 }

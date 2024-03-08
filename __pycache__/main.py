@@ -482,7 +482,7 @@ nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "10:30"
 nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "11:30", "13:30", nokair.aircraft_list[0], "2024-03-09", 2200))
 nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "12:30", "14:30", nokair.aircraft_list[0], "2024-03-09", 2500))
 
-nokair.service_list = Insurance("Insurance", 100)
-nokair.service_list = Baggage("+5kg Baggage", 100, 5)
-nokair.service_list = Baggage("+10kg Baggage", 100, 10)
-nokair.service_list = Baggage("+15kg Baggage", 100, 15)
+# nokair.service_list = Insurance("Insurance", 100)
+# nokair.service_list = Baggage("+5kg Baggage", 100, 5)
+# nokair.service_list = Baggage("+10kg Baggage", 100, 10)
+# nokair.service_list = Baggage("+15kg Baggage", 100, 15)
