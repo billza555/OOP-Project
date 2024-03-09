@@ -1,20 +1,5 @@
 const api = "http://127.0.0.1:8000";
 
-let lastChecked = null;
-
-    function toggleRadioButton(id) {
-    const currentChecked = document.getElementById(id);
-
-    if (lastChecked === currentChecked) {
-
-        currentChecked.checked = false;  // click again = not choose
-        lastChecked = null;
-
-    } else {
-        lastChecked = currentChecked;
-    }
-  }
-
 document.addEventListener('DOMContentLoaded', function () {
     get_all_service();
 });
@@ -36,98 +21,147 @@ async function get_all_service() {
 
         console.log(response_data)
 
-        const container_insurance = document.getElementById("response-insurance");
-        const element_insurance = document.createElement("div");
-            element_insurance.innerHTML = `
-                                        <div class="card" style="width: 18rem;">
-                                            <img src="/src/add5.jpg" class="card-img-top">
-                                            <div class="card-body">
-                                                <p class="card-text">${insurance_data._Service__service_name}</p>
-                                                <p class="card-text">${insurance_data._Baggage__total_cost}</p>
-                                            </div>
-                                            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btncheck1">select</label>
-                        </div>
-                  `;
-        container_insurance.appendChild(element_insurance);
+        localStorage.setItem('insurance',JSON.stringify(insurance_data._Service__service_name));
+        localStorage.setItem('add_5kg', JSON.stringify(add_5kg_data._Service__service_name));
+        localStorage.setItem('add_10kg', JSON.stringify(add_10kg_data._Service__service_name));
+        localStorage.setItem('add_15kg', JSON.stringify(add_15kg_data._Service__service_name));
 
-        const container_5kg = document.getElementById("response-5kg");
-        const element_5kg = document.createElement("div");
-                  element_5kg.innerHTML = `
-                        <div class="card" style="width: 18rem;">
-                              <img src="/src/add5.jpg" class="card-img-top">
-                              <div class="card-body">
-                                    <p class="card-text">${add_5kg_data._Service__service_name}</p>
-                                    <p class="card-text">${add_5kg_data._Insurance__total_cost}</p>
-                              </div>
-                              <input type="radio" class="btn-check" name="btnradio" id="radio1" onclick="toggleRadioButton('radio1')" autocomplete="off">
-                              <label class="btn btn-outline-primary" for="radio1">select</label>
-                        </div>
-                  `;
-        container_5kg.appendChild(element_5kg);
+        let passenger = JSON.parse(localStorage.getItem('passenger_data'))
+        let passenger_num = passenger.length
 
-        const container_10kg = document.getElementById("response-10kg");
-        const element_10kg = document.createElement("div");
-                  element_10kg.innerHTML = `
-                        <div class="card" style="width: 18rem;">
-                              <img src="/src/add10.jpg" class="card-img-top">
-                              <div class="card-body">
-                                    <p class="card-text">${add_10kg_data._Service__service_name}</p>
-                                    <p class="card-text">${add_10kg_data._Insurance__total_cost}</p>
-                              </div>
-                              <input type="radio" class="btn-check" name="btnradio" id="radio2" onclick="toggleRadioButton('radio2')" autocomplete="off">
-                              <label class="btn btn-outline-primary" for="radio2">select</label>
-                              
+        console.log(passenger)
+        console.log(passenger[0])
+        console.log(passenger[0].firstName)
+        
+        const container= document.getElementById("response");
+        for(let i=0 ; i<passenger_num;i++){
+            let element = document.createElement("div");
+                  element.innerHTML = `
+                  <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                              <p class="card-text">${passenger[i].firstName} ${passenger[i].middleName} ${passenger[i].lastName}</p>
                         </div>
-                  `;
-        container_10kg.appendChild(element_10kg);
+                        <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" id="insurance${i}">
+                              <label class="form-check-label" for="insurance${i}">
+                                    ${insurance_data._Service__service_name}
+                                    price : ${insurance_data._Service__total_cost} Bath
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="no_kg_${i}">
+                              <label class="form-check-label" for="no_kg_${i}">
+                                   +0 kg (no more baggage)
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="add_5kg_${i}">
+                              <label class="form-check-label" for="add_5kg_${i}">
+                                    ${add_5kg_data._Service__service_name} 
+                                    price : ${add_5kg_data._Service__total_cost} Bath
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="add_10kg_${i}">
+                              <label class="form-check-label" for="add_10kg_${i}">
+                                    ${add_10kg_data._Service__service_name} 
+                                    price : ${add_10kg_data._Service__total_cost} Bath
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="add_15kg_${i}">
+                              <label class="form-check-label" for="add_15kg_${i}">
+                                    ${add_15kg_data._Service__service_name} 
+                                    price : ${add_15kg_data._Service__total_cost} Bath
+                              </label>
+                        </div>
 
-        const container_15kg = document.getElementById("response-15kg");
-        const element_15kg = document.createElement("div");
-                  element_15kg.innerHTML = `
-                        <div class="card" style="width: 18rem;">
-                              <img src="/src/add15.jpg" class="card-img-top">
-                              <div class="card-body">
-                                    <p class="card-text">${add_15kg_data._Service__service_name}</p>
-                                    <p class="card-text">${add_15kg_data._Insurance__total_cost}</p>
-                              </div>
-                              <input type="radio" class="btn-check" name="btnradio" id="radio3" onclick="toggleRadioButton('radio3')" autocomplete="off">
-                              <label class="btn btn-outline-primary" for="radio3">select</label>
-                        </div>
+                  </div>
                   `;
-        container_15kg.appendChild(element_15kg);
+
+            container.appendChild(element);
+            
+        }
+
+        const container_return= document.getElementById("response-return");
+        for(let i=0 ; i<passenger_num;i++){
+            let element_return = document.createElement("div");
+            element_return.innerHTML = `
+                  <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                              <p class="card-text">${passenger[i].firstName} ${passenger[i].middleName} ${passenger[i].lastName}</p>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" id="insurance_returnn${i}">
+                              <label class="form-check-label" for="insurance${i}">
+                                    ${insurance_data._Service__service_name}
+                                    price : ${insurance_data._Service__total_cost} Bath
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="no_kg_return${i}">
+                              <label class="form-check-label" for="no_kg_${i}">
+                                   +0 kg (no more baggage)
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="add_5kg_return${i}">
+                              <label class="form-check-label" for="add_5kg_${i}">
+                                    ${add_5kg_data._Service__service_name} 
+                                    price : ${add_5kg_data._Service__total_cost} Bath
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="add_10kg_return${i}">
+                              <label class="form-check-label" for="add_10kg_${i}">
+                                    ${add_10kg_data._Service__service_name} 
+                                    price : ${add_10kg_data._Service__total_cost} Bath
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="add_15kg_return${i}">
+                              <label class="form-check-label" for="add_15kg_${i}">
+                                    ${add_15kg_data._Service__service_name} 
+                                    price : ${add_15kg_data._Service__total_cost} Bath
+                              </label>
+                        </div>
+
+                  </div>
+                  `;
+
+            container_return.appendChild(element_return);
+        }
+
+
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
+function save_service_data(){
 
+      //#0 = service_name
+      let passenger = JSON.parse(localStorage.getItem('passenger_data'))
+      let passenger_num = passenger.length
 
+      for(let i = 0 ; i<passenger_num ; i++){
+            console.log(document.getElementById(`insurance${i}`))
+            // localStorage.setItem(`insurance${i}`, JSON.stringify(document.getElementById(`insurance${i}`)));
+            // localStorage.setItem(`no_kg_${i}`, JSON.stringify(document.getElementById(`no_kg_${i}`)));
+            // localStorage.setItem(`add_5kg_${i}`, JSON.stringify(document.getElementById(`add_5kg_${i}`)));
+            // localStorage.setItem(`add_10kg_${i}`, JSON.stringify(document.getElementById(`add_10kg_${i}`)));
+            // localStorage.setItem(`add_15kg_${i}`, JSON.stringify(document.getElementById(`add_15kg_${i}`)));
+            // localStorage.setItem(`insurance_return${i}`, JSON.stringify(document.getElementById(`insurance_return${i}`)));
+            // localStorage.setItem(`no_kg_return${i}`, JSON.stringify(document.getElementById(`no_kg_return${i}`)));
+            // localStorage.setItem(`add_5kg_return${i}`, JSON.stringify(document.getElementById(`add_5kg_return${i}`)));
+            // localStorage.setItem(`add_10kg_return${i}`, JSON.stringify(document.getElementById(`add_10kg_return${i}`)));
+            // localStorage.setItem(`add_15kg_return${i}`, JSON.stringify(document.getElementById(`add_15kg_return${i}`)));
+      }
 
-
-//     <input type="radio" name="radioGroup" id="radio1" onclick="toggleRadioButton('radio1')"> Option 1
-//   </label>
+      console.log(JSON.parse(localStorage.getItem('insurane1')))
+      
+  }
   
-//   <label>
-//     <input type="radio" name="radioGroup" id="radio2" onclick="toggleRadioButton('radio2')"> Option 2
-//   </label>
-  
-//   <label>
-//     <input type="radio" name="radioGroup" id="radio3" onclick="toggleRadioButton('radio3')"> Option 3
-//   </label>
-// </form>
-
-// <script>
-//   let lastChecked = null;
-
-//   function toggleRadioButton(id) {
-//     const currentChecked = document.getElementById(id);
-
-//     if (lastChecked === currentChecked) {
-//       currentChecked.checked = false;  // ถ้าคลิกซ้ำกับตัวที่เคยเลือกไว้แล้ว ให้ไม่เลือก (unchecked)
-//       lastChecked = null;
-//     } else {
-//       lastChecked = currentChecked;
-//     }
-//   }
-// </script>
+  function go_to_pay_page(){
+      // document.location.href = "pay.html";
+  }

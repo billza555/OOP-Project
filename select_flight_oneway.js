@@ -40,7 +40,7 @@ async function show_one_way_flight(new_input_from, new_input_to, new_input_depar
                 <label for="aircraft_number" class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
                 
                 <input type="radio" class="btn-check" name="btnradio" id="btnradio${index}" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="btnradio${index}" onclick="selectFile('depart', ${index}, this)">${data["cost"]}</label>
+                <label class="btn btn-outline-primary" for="btnradio${index}" onclick="selectFlight('depart', ${index}, this)">${data["cost"]}</label>
                 
             `;
                 container.appendChild(element);
@@ -53,7 +53,7 @@ async function show_one_way_flight(new_input_from, new_input_to, new_input_depar
 
 let depart_data = [];
 
-function selectFile(type, index, button) {
+function selectFlight(type, index, button) {
 
     const flightDetails = {
         departure_time: button.parentNode.querySelector('.depart-time-label').textContent,

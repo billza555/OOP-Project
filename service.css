@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #ffcb0b;
+    padding-left: 120px;
+    height: 80px;
+}
+
+.container {
+    background-color: greenyellow;
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.depart-container, .return-container {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: blue; */
+    width: 1100;
+
+}
+
+.depart-service, .return-service {
+    background-color: brown;
+    border-radius: 25px;
+    padding: 30px;
+    height: 300px;
+}

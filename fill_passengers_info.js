@@ -99,7 +99,9 @@ function to_select_seat() {
             firstName: document.getElementById(`passenger-first-name`).value,
             middleName: document.getElementById(`passenger-middle-name`).value,
             lastName: document.getElementById(`passenger-last-name`).value,
-            birthDate: document.getElementById(`birth_date`).value
+            birthDate: document.getElementById(`birth_date`).value,
+            phone_number: document.getElementById(`passenger-phone-number`),
+            email: document.getElementById(`passenger-email`).value
         };
     
         passenger_data.push(first_passenger_info)

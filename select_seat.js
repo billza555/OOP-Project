@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const return_date = JSON.parse(localStorage.getItem('input_return_date'));
     const date_list = [depart_date, return_date]
 
-    console.log("Flight list : ", flight_list)
+    // console.log("Flight list : ", flight_list)
 
     flight_number_list = []
     flight_number_list.push(flight_list[0]["flight_number"])
     flight_number_list.push(flight_list[1]["flight_number"])
 
-    console.log("new flight number list : ", flight_number_list)
+    // console.log("new flight number list : ", flight_number_list)
 
     show_all_seats(flight_number_list, date_list);
 });
@@ -26,8 +26,12 @@ async function show_all_seats(flight_number_list, date_list) {
 
         const depart_seats_list = await response_1.json();
         const return_seats_list = await response_2.json();
+
         console.log("Depart seats list : ", depart_seats_list)
         console.log("Return seats list : ", return_seats_list)
+
+        localStorage.setItem('depart_seat_list', JSON.stringify(depart_seats_list));
+        localStorage.setItem('return_seat_list', JSON.stringify(return_seats_list));
 
         // Depart
 
@@ -46,7 +50,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                     <input type="checkbox" class="btn-check btn-select" id="normal-seat-${index}" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="normal-seat-${index}" id="select-seats-label">${data._Seats__seat_number}</label>
+                    <label class="btn btn-outline-primary depart-seat-number" for="normal-seat-${index}" id="select-seats-label" onclick="select_seats('depart', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 normal_container_1.appendChild(element);
             }
@@ -65,7 +69,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                     <input type="checkbox" class="btn-check btn-select" id="normal-seat-${index}" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="normal-seat-${index}" id="select-seats-label">${data._Seats__seat_number}</label>
+                    <label class="btn btn-outline-primary depart-seat-number" for="normal-seat-${index}" id="select-seats-label" onclick="select_seats('depart', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 normal_container_2.appendChild(element);
             }
@@ -84,7 +88,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                     <input type="checkbox" class="btn-check btn-select" id="normal-seat-${index}" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="normal-seat-${index}" id="select-seats-label">${data._Seats__seat_number}</label>
+                    <label class="btn btn-outline-primary depart-seat-number" for="normal-seat-${index}" id="select-seats-label" onclick="select_seats('depart', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 normal_container_3.appendChild(element);
             }
@@ -98,7 +102,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                                     <input type="checkbox" class="btn-check btn-select" id="normal-seat-${index}" autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="normal-seat-${index}" id="select-seats-label">${data._Seats__seat_number}</label>
+                                    <label class="btn btn-outline-primary depart-seat-number" for="normal-seat-${index}" id="select-seats-label" onclick="select_seats('depart', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 happy_container.appendChild(element);
             }
@@ -112,7 +116,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                                     <input type="checkbox" class="btn-check btn-select" id="normal-seat-${index}" autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="normal-seat-${index}" id="select-seats-label">${data._Seats__seat_number}</label>
+                                    <label class="btn btn-outline-primary depart-seat-number" for="normal-seat-${index}" id="select-seats-label" onclick="select_seats('depart', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 premium_container.appendChild(element);
             }
@@ -137,7 +141,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                     <input type="checkbox" class="btn-check btn-select" id="return-normal-seat-${index}" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="return-normal-seat-${index}" id="return-select-seats-label">${data._Seats__seat_number}</label>
+                    <label class="btn btn-outline-primary return-seat-number" for="return-normal-seat-${index}" id="return-select-seats-label" onclick="select_seats('return', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 return_normal_container_1.appendChild(element);
             }
@@ -156,7 +160,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                     <input type="checkbox" class="btn-check btn-select" id="return-normal-seat-${index}" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="return-normal-seat-${index}" id="return-select-seats-label">${data._Seats__seat_number}</label>
+                    <label class="btn btn-outline-primary return-seat-number" for="return-normal-seat-${index}" id="return-select-seats-label" onclick="select_seats('return', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 return_normal_container_2.appendChild(element);
             }
@@ -175,7 +179,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                     <input type="checkbox" class="btn-check btn-select" id="return-normal-seat-${index}" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="return-normal-seat-${index}" id="return-select-seats-label">${data._Seats__seat_number}</label>
+                    <label class="btn btn-outline-primary return-seat-number" for="return-normal-seat-${index}" id="return-select-seats-label" onclick="select_seats('return', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 return_normal_container_3.appendChild(element);
             }
@@ -189,7 +193,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                                     <input type="checkbox" class="btn-check btn-select" id="return-happy-seat-${index}" autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="return-happy-seat-${index}" id="return-select-seats-label">${data._Seats__seat_number}</label>
+                                    <label class="btn btn-outline-primary return-seat-number" for="return-happy-seat-${index}" id="return-select-seats-label" onclick="select_seats('return', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 return_happy_container.appendChild(element);
             }
@@ -203,7 +207,7 @@ async function show_all_seats(flight_number_list, date_list) {
                 const element = document.createElement("div");
                 element.innerHTML = `
                                     <input type="checkbox" class="btn-check btn-select" id="return-premium-seat-${index}" autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="return-premium-seat-${index}" id="return-select-seats-label">${data._Seats__seat_number}</label>
+                                    <label class="btn btn-outline-primary  return-seat-number" for="return-premium-seat-${index}" id="return-select-seats-label" onclick="select_seats('return', ${index}, this)">${data._Seats__seat_number}</label>
                 `;
                 return_premium_container.appendChild(element);
             }
@@ -212,4 +216,59 @@ async function show_all_seats(flight_number_list, date_list) {
     } catch(error) {
         console.error('Error:', error);
     }
+}
+
+let len_passenger = JSON.parse(localStorage.getItem('passenger_num'));
+
+let selectedDepartSeats = []; // Declare a global array to store selected depart seats
+let depart_seat = [];
+
+function select_seats(type, index, button) {
+    const depart_seats_list = JSON.parse(localStorage.getItem('depart_seat_list'));
+    console.log("Depart seat list : ", depart_seats_list)
+
+    const depart_selected_seat = button.parentNode.querySelector('.depart-seat-number').textContent
+
+    const isSeatSelected = selectedDepartSeats.includes(depart_selected_seat);
+
+    if (!isSeatSelected) {
+
+        const seat_detail = {
+            seat_number: depart_selected_seat,
+            seat_category: depart_seats_list[index]._Seats__seat_category._SeatCategory__name,
+            seat_price: depart_seats_list[index]._Seats__seat_category._SeatCategory__price
+        };
+
+        selectedDepartSeats.push(depart_selected_seat);
+
+        if (selectedDepartSeats.length <= len_passenger) {
+            depart_seat.push(seat_detail);
+            // Change the button style or add visual indication as needed
+
+            // Example: Change button color
+            button.classList.add('selected-seat');
+        } else {
+            
+        }
+    } else {
+        // If the seat is already selected, remove it from the array
+        const seatIndex = selectedDepartSeats.indexOf(depart_selected_seat);
+        selectedDepartSeats.splice(seatIndex, 1);
+
+        // Remove the seat from the depart_seat array
+        depart_seat = depart_seat.filter(seat => seat.seat_number !== depart_selected_seat);
+
+        // Remove the visual indication (change button style as needed)
+
+        // Example: Remove selected-seat class
+        button.classList.remove('selected-seat');
+    }
+
+    console.log("Depart Seat", selectedDepartSeats);
+}
+
+function to_select_service() {
+
+    document.location.href = "service.html";
+
 }

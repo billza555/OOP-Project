@@ -9,17 +9,43 @@
 </head>
 <body>
       
-      
-      <h1>Service</h1>
-      <div class="services-container">
-            <div  id="response-insurance"></div>
-            <div  id="response-5kg"></div>
-            <div  id="response-10kg"></div>
-            <div  id="response-15kg"></div>
+      <nav class="navbar navbar-expand-lg nav-underline">
+            <div class="container-fluid fs-4 fw-bold">
+              <a class="navbar-brand fw-bold fs-3" href="index.html">tambye</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+      </nav>
+
+      <div class="container">
+            <div class="depart-container">
+                  <div class="depart-service">
+                        <div>
+                              <label class="depart-label fw-bold">Depart</label>
+                        </div>
+                        <div  id="response">
+                              <!-- for depart service -->
+                        </div>
+                  </div>
+            </div>
+
+            <div class="return-container">
+                  <div class="return-service">
+                        <div>
+                              <label class="depart-label fw-bold">Return</label>
+                        </div>
+                        <div  id="response-return">
+                              <!-- for return service -->
+                        </div>
+                  </div>
+            </div>
       </div>
 
       
       
+
+      <button onclick="save_service_data()">next</button>
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <script src="service.js"></script>
