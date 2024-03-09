@@ -46,18 +46,14 @@
             <div class="select-from">
                 <label class="desc-label">From</label>
                 <select class="form-select input-select" id="from_select">
-                    <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Don Mueang">Don Mueang</option>
-                    <!-- Add more -->
+                    <!-- for all airport list -->
                 </select>
             </div>
             
             <div class="select-to">
                 <label class="desc-label">To</label>
                 <select class="form-select input-select" id="to_select">
-                    <option value="Chiang Mai">Chiang Mai</option>
-                    <option value="Don Mueang">Don Mueang</option>
-                    <!-- Add more -->
+                    <!-- for all airport list -->
                 </select>
             </div>
             <div class="select-depart">
@@ -77,14 +73,6 @@
     </div>
     <script src="one_way.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        var input;
-        var dateEntered;
-        document.getElementById("departure").addEventListener("change", function() {
-        var input = this.value;
-        var dateEntered = new Date(input);
-        console.log(input); //e.g. 2015-11-13
-        console.log(dateEntered); //e.g. Fri Nov 13 2015 00:00:00 GMT+0000 (GMT Standard Time)
-});
     </script>
 </body>
 </html>

@@ -23,7 +23,7 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
 
         // Departure flight label
         const departLabelContainer = document.querySelector(".depart-label");
-        departLabelContainer.textContent = `Departure : ${depart_flight_data[0]["depart_starting_location"]} --> ${depart_flight_data[0]["depart_destination"]}`;
+        departLabelContainer.textContent = `Departure : ${depart_flight_data[0]["starting_location"]} --> ${depart_flight_data[0]["destination"]}`;
 
         // Departure flight details
         const departContainer = document.getElementById("flight-detail-each-item");
@@ -35,14 +35,16 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
                     <label for="arrive-time" class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</label>
                     <label for="flight-number" class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</label>
                     <label for="aircraft_number" class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
-                    <button class="btn btn-success choose-flight-btn flight-detail-items-i" id="select-btn" onclick="selectFile('depart', ${index}, this)">${data["cost"]} Baht</button>
+
+                    <input type="radio" class="btn-check" name="departRadio" id="departBtnRadio${index}" autocomplete="off">
+                    <label class="btn btn-outline-primary choose-flight-btn flight-detail-items-i" for="departBtnRadio${index}" id="selectBtn" onclick="selectFile('depart', ${index}, this)">${data["cost"]} Baht</label>
                 `;
             departContainer.appendChild(element);
         });
 
         // Return flight label
         const return_label = document.querySelector(".return-label");
-        return_label.textContent = `Return : ${return_flight_data[0]["return_starting_location"]} --> ${return_flight_data[0]["return_destination"]}`;
+        return_label.textContent = `Return : ${return_flight_data[0]["starting_location"]} --> ${return_flight_data[0]["destination"]}`;
 
         // Return flight details
         const returnContainer = document.getElementById("flight-return-detail-each-item");
@@ -54,8 +56,10 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
                 <label for="arrive-time" class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</label>
                 <label for="flight-number" class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</label>
                 <label for="aircraft_number" class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
-                <button class="btn btn-success choose-flight-btn flight-detail-items-i" id="select-btn" onclick="selectFile('return', ${index}, this)">${data["cost"]} Baht</button>
-            `;
+
+                <input type="radio" class="btn-check" name="returnRadio" id="returnBtnRadio${index}" autocomplete="off">
+                <label class="btn btn-outline-primary choose-flight-btn flight-detail-items-i" for="returnBtnRadio${index}" id="selectBtn" onclick="selectFile('return', ${index}, this)">${data["cost"]} Baht</label>
+                `;
             returnContainer.appendChild(element);
         });
     } catch (error) {
@@ -110,3 +114,33 @@ function to_passengers_fill() {
     document.location.href = "fill_passengers_info.html";
 
 }
+
+
+
+
+// 
+/*{ <input type="radio" name="radioGroup" id="radio1" onclick="toggleRadioButton('radio1')"> Option 1
+</label>
+
+<label>
+  <input type="radio" name="radioGroup" id="radio2" onclick="toggleRadioButton('radio2')"> Option 2
+</label>
+
+<label>
+  <input type="radio" name="radioGroup" id="radio3" onclick="toggleRadioButton('radio3')"> Option 3
+</label>
+</form>
+
+<script>
+let lastChecked = null;
+
+function toggleRadioButton(id) {
+  const currentChecked = document.getElementById(id);
+
+  if (lastChecked === currentChecked) {
+    currentChecked.checked = false;  // ถ้าคลิกซ้ำกับตัวที่เคยเลือกไว้แล้ว ให้ไม่เลือก (unchecked)
+    lastChecked = null;
+  } else {
+    lastChecked = currentChecked;
+  } }
+}*/

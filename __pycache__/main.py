@@ -52,7 +52,9 @@ class AirportSystem:
 
         for flight_instance in self.__flight_instance_list:
             if flight_instance.starting_location.name == starting_location and flight_instance.destination.name == destination and flight_instance.date == depart_date:
-                flight_instance_info = {"departure_time": flight_instance.departure_time,
+                flight_instance_info = {"starting_location": starting_location,
+                                        "destination": destination,
+                                        "departure_time": flight_instance.departure_time,
                                         "arrival_time": flight_instance.arrival_time,
                                         "flight_number": flight_instance.flight_number,
                                         "aircraft_number": flight_instance.aircraft.aircraft_number,
@@ -63,11 +65,13 @@ class AirportSystem:
         if return_date != None:
             for flight_instance in self.__flight_instance_list:
                 if flight_instance.destination.name == starting_location and flight_instance.starting_location.name == destination and flight_instance.date == return_date:
-                    flight_instance_info = {"departure_time": flight_instance.departure_time,
-                                        "arrival_time": flight_instance.arrival_time,
-                                        "flight_number": flight_instance.flight_number,
-                                        "aircraft_number": flight_instance.aircraft.aircraft_number,
-                                        "cost": flight_instance.cost}
+                    flight_instance_info = {"starting_location": destination,
+                                            "destination": starting_location,
+                                            "departure_time": flight_instance.departure_time,
+                                            "arrival_time": flight_instance.arrival_time,
+                                            "flight_number": flight_instance.flight_number,
+                                            "aircraft_number": flight_instance.aircraft.aircraft_number,
+                                            "cost": flight_instance.cost}
 
                     returning_flight_instance.append(flight_instance_info)
 

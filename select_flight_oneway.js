@@ -1,64 +1,92 @@
 const api = "http://127.0.0.1:8000";
 
 document.addEventListener('DOMContentLoaded', function () {
-    const from = JSON.parse(localStorage.getItem('from'));
-    const to = JSON.parse(localStorage.getItem('to'));
-    const date = JSON.parse(localStorage.getItem('date'));
-    const passenger_num = JSON.parse(localStorage.getItem('passenger_num'));
 
-    console.log(from)
-    console.log(to)
-    console.log(date)
-    console.log(passenger_num)
+    const new_input_from = JSON.parse(localStorage.getItem('input_from'));
+    const new_input_to = JSON.parse(localStorage.getItem('input_to'));
+    const new_input_depart_date = JSON.parse(localStorage.getItem('input_depart_date'));
 
-
-    get_all_flight(from, to, date);
+    show_one_way_flight(new_input_from, new_input_to, new_input_depart_date);
    
 });
 
-async function get_all_flight(from, to, date) {
+async function show_one_way_flight(new_input_from, new_input_to, new_input_depart_date) {
       
-      try {
-            const response = await fetch(`${api}/flight_instance_matches?starting_location=${from}&destination=${to}&depart_date=${date}&return_date=""`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const response_data = await response.json();
-            console.log(response_data)  
+    try {
 
-            const departFlights = response_data[0];
-            const len_response = departFlights.length;
+        const response = await fetch(`${api}/flight_instance_matches?starting_location=${new_input_from}&destination=${new_input_to}&depart_date=${new_input_depart_date}&return_date=""`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        } 
 
-            const departLabelContainer = document.querySelector(".depart-label");
-            departLabelContainer.textContent = `Departure : ${departFlights[0]["depart_starting_location"]} --> ${departFlights[0]["depart_destination"]}`;
+        const response_data = await response.json();
+        console.log(response_data)  
 
-            const container = document.getElementById("flight-detail-each-item");
+        const departFlights = response_data[0];
 
-            departFlights.forEach((data,index) => {
-                const element = document.createElement("div");
-                element.innerHTML = `
+        const departLabelContainer = document.querySelector(".depart-label");
+        departLabelContainer.textContent = `Departure : ${departFlights[0]["starting_location"]} --> ${departFlights[0]["destination"]}`;
+
+        const container = document.getElementById("flight-detail-each-item");
+
+        departFlights.forEach((data,index) => {
+            const element = document.createElement("div");
+            element.innerHTML = `
                     
-                    <label for="depart-time" class="depart-time-label flight-detail-items-i" id="depart-time">${data["depart_departure_time"]}</label>
-                    <label for="arrive-time" class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["depart_arrival_time"]}</label>
-                    <label for="flight-number" class="flight-number-label flight-detail-items-i" id="flight_number">${data["depart_flight_number"]}</label>
-                    <label for="aircraft_number" class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["depart_aircraft_number"]}</label>
-                    
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio${index}" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="btnradio${index}">${data["depart_cost"]}</label>
-                    
-                `;
+                <label for="depart-time" class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</label>
+                <label for="arrive-time" class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</label>
+                <label for="flight-number" class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</label>
+                <label for="aircraft_number" class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
+                
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio${index}" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio${index}" onclick="selectFile('depart', ${index}, this)">${data["cost"]}</label>
+                
+            `;
                 container.appendChild(element);
             });
 
-        } catch (error) {
+    } catch (error) {
             console.error('Error:', error);
+    }
+}
+
+let depart_data = [];
+
+function selectFile(type, index, button) {
+
+    const flightDetails = {
+        departure_time: button.parentNode.querySelector('.depart-time-label').textContent,
+        arrival_time: button.parentNode.querySelector('.arrive-time-label').textContent,
+        flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
+        aircraft_number: button.parentNode.querySelector('.aircraft_number-label').textContent,
+        cost: button.textContent.split(' ')[0]
+    };
+
+    if (type === 'depart') {
+        if (depart_data.length > 0) {
+            depart_data[0] = flightDetails;
+        } else {
+            depart_data.push(flightDetails);
         }
+    }
+
+    const select_data = [...depart_data];
+
+    console.log("Depart : ", depart_data);
+    console.log("Selected : ", select_data);
+
+    localStorage.setItem('select_flight', JSON.stringify(select_data));
 
 }
 
-//<input type="radio" class="btn btn-success choose-flight-btn flight-detail-items-i" id="select-btn${index}" name="flightSelection" value="${data["depart_cost"]} Baht">
-//<button class="btn btn-success choose-flight-btn flight-detail-items-i" id="select-btn">${data["depart_cost"]} Baht</button>
+function to_passengers_fills() {
 
-//<input type="radio" class="btn-check" name="btnradio" id="btnradio${index}" autocomplete="off" checked>
-//<label class="btn btn-outline-primary" for="btnradio${index}">${data["depart_cost"]}</label>
+    const select_flight_data = JSON.parse(localStorage.getItem('select_flight'));
+    console.log("Select Flight : ", select_flight_data)
+    localStorage.setItem('select_flight', JSON.stringify(select_flight_data));
+
+    document.location.href = "fill_passengers_info.html";
+
+}
 

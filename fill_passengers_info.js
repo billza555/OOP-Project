@@ -95,11 +95,11 @@ function to_select_seat() {
 
     } else {
         const first_passenger_info = {
-            title: document.getElementById(`title-input_${i}`).value,
-            firstName: document.getElementById(`passenger-first-name_${i}`).value,
-            middleName: document.getElementById(`passenger-middle-name_${i}`).value,
-            lastName: document.getElementById(`passenger-last-name_${i}`).value,
-            birthDate: document.getElementById(`birth_date_${i}`).value
+            title: document.getElementById(`title-input`).value,
+            firstName: document.getElementById(`passenger-first-name`).value,
+            middleName: document.getElementById(`passenger-middle-name`).value,
+            lastName: document.getElementById(`passenger-last-name`).value,
+            birthDate: document.getElementById(`birth_date`).value
         };
     
         passenger_data.push(first_passenger_info)
@@ -108,6 +108,6 @@ function to_select_seat() {
     console.log(passenger_data)
     localStorage.setItem('passenger_data', JSON.stringify(passenger_data));
 
-    // document.location.href = "select_seat.html";
+    document.location.href = "select_seat.html";
 
 }

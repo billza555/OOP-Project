@@ -1,4 +1,5 @@
 const api = "http://127.0.0.1:8000";
+
 document.addEventListener('DOMContentLoaded', function () {
       get_all_airport();
 });
