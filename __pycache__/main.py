@@ -1,5 +1,6 @@
 from datetime import datetime
 from uuid import uuid4
+import random
 #API
 #1.show_reservation
 #2.pay_by_credit_card
@@ -82,7 +83,7 @@ class AirportSystem:
             if flight_instance.flight_number == flight_number and flight_instance.date == date:
                 return flight_instance  
             
-    def paid_by_qr(self, reservation):
+    def pay_by_qr(self, reservation):
         reservation = self.create_reservation_for_paid(reservation, transaction)
         if reservation:
             payment_method = Qr()
@@ -156,11 +157,14 @@ class AirportSystem:
         if reservation:
             passenger_list = reservation.get_passenger_list_by_last_name(last_name)
             boarding_passes_list = []
-            #flight_number, flight_seat_number, booking_reference, depart_date, passenger
+            for flight_instance in reservation.flight_instances_list:
+                reservation.add_random_flight_seat(flight_instance)
             for passenger in passenger_list:
                 boarding_pass = reservation.create_boarding_pass(passenger)
-                boarding_passes_list.append(boarding_pass)
+                if boarding_pass not in reservation.boarding_passes_list:
+                    boarding_passes_list.append(boarding_pass)
         return boarding_passes_list
+    
 class Reservation:
     def __init__(self):
         self.__booking_reference = None
@@ -180,8 +184,12 @@ class Reservation:
         return self.__transaction
 
     @property
-    def booking_referrence(self):
+    def booking_reference(self):
         return self.__booking_reference
+
+    @property
+    def boarding_passes_list(self):
+        return self.__boarding_passes_list
     
     def add_passenger(self, passenger):
         self.__passenger_list.append(passenger)
@@ -216,7 +224,19 @@ class Reservation:
         for passenger in self.__passenger_list:
             for service in passenger.service_list:
                 self.__total_cost += service.total_cost
-                
+    
+    def add_random_flight_seat(self, flight_instance):
+        flight_instance_index = self.__flight_instance_list.index(flight_instance)
+        chosen_seat_amount = len(self.__flight_seat_list[flight_instance_index])
+        passenger_amount = len(self.__passenger_list)
+        for i in range(chosen_seat_amount, passenger_amount+1):
+            while(True):
+                random_seat = random.choice(flight_instance.flight_seat_list)
+                if random_seat.occupied == False and random_seat.seat_category.name == "normal_seat":
+                    random_seat.occupied = True
+                    self.__flight_seat_list[flight_instance_index].append(random_seat)
+                    break
+    
     def create_boarding_pass(self, passenger):
         #flight_number, flight_seat_number, booking_reference, depart_date, passenger
         passenger_index = self.__passenger_list.index(passenger)
@@ -225,7 +245,6 @@ class Reservation:
             flight_seat_number = self.__flight_seat_list[index][passenger_index]
             depart_date = flight_instance.date
             boarding_pass = BoardingPass(flight_number, flight_seat_number, self.__booking_reference, depart_date, passenger)
-            self.boarding_pass.append(boarding_pass)
         return boarding_pass
 class User:
     def __init__(self, title, first_name, middle_name, last_name, birthday, phone_number, email):
@@ -253,16 +272,6 @@ class Admin(User):
 
 class BoardingPass:
     def __init__(self, flight_number, flight_seat_number, booking_reference, depart_date, passenger):
-        # self.__flight_seat_number = passenger.flight_seats[][1]
-        # self.__flight_number = reservation.flight_instances[][1]
-        # self.__passenger_title = passenger.title
-        # self.__passenger_name = passenger.name
-        # self.__aircraft_number = reservation.flight_instances[][1].aircraft.aircraft_number
-        # self.__booking_reference = reservation.booking_reference
-        # self.__departure_date = reservation.flight_instances[][1].date
-        # self.__boarding_time = reservation.flight_instances[][1].boarding_time
-        # self.__from = reservation.flight_instances[][1].froml
-        # self.__to = reservation.flight_instances[][1].to
         flight_instance = nokair.get_flight_instance(flight_number, depart_date)
         self.__flight_seat_number = flight_seat_number
         self.__flight_number = flight_number
@@ -277,15 +286,10 @@ class BoardingPass:
         self.__destination = flight_instance.destination.name
 
 class Flight:
-    def __init__(self, starting_location, destination, flight_number):
+    def __init__(self, starting_location, destination):
         self.__starting_location = starting_location
         self.__destination = destination
-        self.__flight_number = flight_number
 
-    @property
-    def flight_number(self):
-        return self.__flight_number  
-      
     @property
     def starting_location(self):
         return self.__starting_location
@@ -295,17 +299,22 @@ class Flight:
         return self.__destination
 
 class FlightInstance(Flight):
-    def __init__(self, flight, departure_time, arrival_time, aircraft, date, cost):
-        super().__init__(flight.starting_location, flight.destination, flight.flight_number)
+    def __init__(self, flight, flight_number, departure_time, arrival_time, aircraft, date, cost):
+        super().__init__(flight.starting_location, flight.destination)
         self.__flight_seat_list = []
         for seat in aircraft.seat_list:
             self.__flight_seat_list.append(FlightSeat(seat))
+        self.__flight_number = flight_number
         self.__departure_time = departure_time
         self.__arrival_time = arrival_time
         self.__aircraft = aircraft
         self.__date = date
         self.__cost = int(cost)
-        
+    
+    @property
+    def flight_number(self):
+        return self.__flight_number
+    
     @property
     def departure_time(self):
         return self.__departure_time
@@ -447,7 +456,7 @@ class Service:
     @property
     def total_cost(self):
         return self.__total_cost
-    
+
     @total_cost.setter
     def total_cost(self, total_cost):
         self.__total_cost = total_cost
@@ -455,96 +464,30 @@ class Service:
 class Insurance(Service):
     def __init__(self, service_name, price_per_unit):
         super().__init__(service_name, price_per_unit)
-        self.__total_cost = price_per_unit
+        self.total_cost = price_per_unit
+
 
 class Baggage(Service):
     def __init__(self, service_name, price_per_unit, weight):
         super().__init__(service_name, price_per_unit)
         self.__weight = weight
-        self.__total_cost = price_per_unit * weight
-
-    def get_total_cost(self):
-        return self.price_per_unit * self.__weight
-    
-    @property
-    def bag_weight(self) :
-        return self.__weight
-    
-    @property
-    def total_cost(self) :
-        return self.__total_cost
-    
-    
-        
-    
+        self.total_cost = price_per_unit * weight
 
 nokair = AirportSystem()
 nokair.airport_list.append(Airport("Don Mueang", "DMK"))
 nokair.airport_list.append(Airport("Chiang Mai", "CNX"))
-nokair.airport_list.append(Airport("Phuket", "HKT"))
-nokair.airport_list.append(Airport("Surin", "SR1"))
-nokair.flight_list.append(Flight(nokair.airport_list[0], nokair.airport_list[1], "ABC"))
-nokair.flight_list.append(Flight(nokair.airport_list[1], nokair.airport_list[0], "ABC"))
+nokair.flight_list.append(Flight(nokair.airport_list[0], nokair.airport_list[1]))
+nokair.flight_list.append(Flight(nokair.airport_list[1], nokair.airport_list[0]))
 
-# change date format
 nokair.aircraft_list.append(Aircraft("101"))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "10:00", "12:00", nokair.aircraft_list[0], "2024-03-08", 1000))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "11:00", "13:00", nokair.aircraft_list[0], "2024-03-08", 1200))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "12:00", "14:00", nokair.aircraft_list[0], "2024-03-08", 1500))
-
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "10:30", "12:30", nokair.aircraft_list[0], "2024-03-09", 2000))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "11:30", "13:30", nokair.aircraft_list[0], "2024-03-09", 2200))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "12:30", "14:30", nokair.aircraft_list[0], "2024-03-09", 2500))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F1", "8:00", "10:00", nokair.aircraft_list[0], "2024-03-08", 1000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F2", "10:00", "12:00", nokair.aircraft_list[0], "2024-03-09", 1000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F3", "11:00", "13:00", nokair.aircraft_list[0], "2024-03-08", 2000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F4", "14:00", "15:00", nokair.aircraft_list[0], "2024-03-09", 2000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F5", "20:00", "22:00", nokair.aircraft_list[0], "2024-03-08", 800))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F6", "20:00", "22:00", nokair.aircraft_list[0], "2024-03-09", 800))
 
 nokair.service_list = Insurance("Insurance", 100)
 nokair.service_list = Baggage("+5kg Baggage", 100, 5)
 nokair.service_list = Baggage("+10kg Baggage", 100, 10)
 nokair.service_list = Baggage("+15kg Baggage", 100, 15)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# nokair = AirportSystem()
-# nokair.airport_list.append(Airport("Don Mueang", "DMK"))
-# nokair.airport_list.append(Airport("Chiang Mai", "CNX"))
-# nokair.flight_list.append(Flight(nokair.airport_list[0], nokair.airport_list[1], "ABC"))
-# nokair.flight_list.append(Flight(nokair.airport_list[1], nokair.airport_list[0], "BCD"))
-
-# # change date format
-# nokair.aircraft_list.append(Aircraft("101"))
-# nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "10:00", "12:00", nokair.aircraft_list[0], "2024-03-08", 1000))
-# nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "11:00", "13:00", nokair.aircraft_list[0], "2024-03-08", 1200))
-# nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "12:00", "14:00", nokair.aircraft_list[0], "2024-03-08", 1500))
-
-# nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "10:30", "12:30", nokair.aircraft_list[0], "2024-03-09", 2000))
-# nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "11:30", "13:30", nokair.aircraft_list[0], "2024-03-09", 2200))
-# nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "12:30", "14:30", nokair.aircraft_list[0], "2024-03-09", 2500))
-
-# nokair.service_list = Insurance("Insurance", 100)
-# nokair.service_list = Baggage("+5kg Baggage", 100, 5)
-# nokair.service_list = Baggage("+10kg Baggage", 100, 10)
-# nokair.service_list = Baggage("+15kg Baggage", 100, 15)

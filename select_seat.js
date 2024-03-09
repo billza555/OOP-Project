@@ -9,10 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //show all seats of flight instance
-async function show_all_seats(flight_list, date_list){
-    try{
+async function show_all_seats(flight_list, date_list) {
+    try {
+
+        console.log(flight_list, date_list)
         all_seats = [];
-        for (let index = 0; index < flight_list.length; index++) {
+
+        for (let index = 0 ; index < flight_list.length ; index++) {
             const flight_instance_data = flight_list[index];
             const flight_number = flight_instance_data["flight_number"];
             console.log(flight_number)
@@ -21,36 +24,39 @@ async function show_all_seats(flight_list, date_list){
             const response = await fetch(url);
             const data = await response.json();
             console.log(data);
+            create_all_seats(data, index);
             all_seats.push(data)
         };
-    
-        const seat_container = document.getElementById("seat_container");
-
-        // order = "ABCDEF"
-        // for (var i = 0 ; i < 7 ; i++) {
-        //     const element = document.createElement("div");
-        //     for(var j = 0; j < 7; j++)
-        //     {
-        //         if(i == 0)
-        //         {
-        //             element.innerHTML = `
-        //             order[j]&nbsp;`;
-        //         }
-        //         else if(j == 0)
-        //         {
-        //             element.innerHTML = `
-        //             ${i}&nbsp;`;
-        //         }
-        //         else
-        //         {
-        //             element.innerHTML = `
-        //         <button class="btn btn-light" id="${order[j]+i}">`;
-        //         }
-        //     }
-        //     seat_container.append(element)
-        // }
-    }catch(error){
+        
+    } catch(error) {
         console.error('Error:', error);
     }
+}
+
+function create_all_seats(data, index) {
     
+    data.forEach(seat => {
+        const seat_number = seat.getItem('seat_number');
+        const seat_category = seat.getItem('seat_category');
+        const seat_occupied = seat.getItem("occupied");
+        const element = document.createElement("div");
+        if(seat_occupied)
+        {
+            element.classList.add("btn", "btn-close");
+        }
+        else if(seat_category <= 200)
+        {
+            element.classList.add("btn", "btn-info");
+        }
+        else if(seat_category <= 400)
+        {
+            element.classList.add("btn", "btn-warning");
+        }
+        else if(seat_category <= 600)
+        {
+            element.classList.add("btn", "btn-danger");
+        }
+        element.id = `${seat_number} ${index}`;
+        seat_container.appendChild(element)
+    });
 }
