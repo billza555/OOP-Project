@@ -443,12 +443,15 @@ class Service:
     @property
     def total_cost(self):
         return self.__total_cost
+    
+    @total_cost.setter
+    def total_cost(self, total_cost):
+        self.__total_cost = total_cost
 
 class Insurance(Service):
     def __init__(self, service_name, price_per_unit):
         super().__init__(service_name, price_per_unit)
         self.__total_cost = price_per_unit
-
 
 class Baggage(Service):
     def __init__(self, service_name, price_per_unit, weight):
@@ -467,9 +470,7 @@ class Baggage(Service):
     def total_cost(self) :
         return self.__total_cost
     
-    @total_cost.setter
-    def total_cost(self, total_cost):
-        self.__total_cost = total_cost
+    
         
     
 

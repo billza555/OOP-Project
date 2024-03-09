@@ -20,8 +20,8 @@ app.add_middleware(
 async def check_in(booking_ref:str, last_name:str):
     return [{"type":"depart","date":"01-01-2000", "flight number":"ABC", "Aircraft":"101", "from":"bangkok","to":"chaingm mai", "depart time":"08:00","arrival time":"10:00"},
             {"type":"return","date":"02-01-2000", "flight number":"ZXC", "Aircraft":"122", "from":"chaing mai","to":"bangkok", "depart time":"12:00","arrival time":"14:00"}]
-@app.get("/boarding_pass")
 
+@app.get("/boarding_pass")
 async def get_boarding_pass(booking_ref:str, last_name:str, type:str):
     return {"eiei":"check"}
 
