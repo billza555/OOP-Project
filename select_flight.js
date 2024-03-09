@@ -114,33 +114,3 @@ function to_passengers_fill() {
     document.location.href = "fill_passengers_info.html";
 
 }
-
-
-
-
-// 
-/*{ <input type="radio" name="radioGroup" id="radio1" onclick="toggleRadioButton('radio1')"> Option 1
-</label>
-
-<label>
-  <input type="radio" name="radioGroup" id="radio2" onclick="toggleRadioButton('radio2')"> Option 2
-</label>
-
-<label>
-  <input type="radio" name="radioGroup" id="radio3" onclick="toggleRadioButton('radio3')"> Option 3
-</label>
-</form>
-
-<script>
-let lastChecked = null;
-
-function toggleRadioButton(id) {
-  const currentChecked = document.getElementById(id);
-
-  if (lastChecked === currentChecked) {
-    currentChecked.checked = false;  // ถ้าคลิกซ้ำกับตัวที่เคยเลือกไว้แล้ว ให้ไม่เลือก (unchecked)
-    lastChecked = null;
-  } else {
-    lastChecked = currentChecked;
-  } }
-}*/

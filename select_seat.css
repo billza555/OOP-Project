@@ -8,3 +8,80 @@
     padding-left: 120px;
     height: 80px;
 }
+
+.depart-container, .return-container {
+    background-color: #ffcb0b;
+    width: 1200px;
+    height: 400px;
+    margin: 50px;
+    border-radius: 25px;
+}
+
+.depart-label, .return-label {
+    padding: 50px 0 20px 50px;
+}
+
+.label-depart, .label-return {
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+
+.flight-seats {
+    background-color: aqua;
+    margin: 20px;
+    height: 200px;
+    border-radius: 160px 0 0 160px ;
+    margin-left: 50px;
+    margin-right: 50px;
+    align-items: center;
+
+}
+
+.seats, .return-seats {
+    display: flex;
+    justify-content: space-around;
+}
+
+.happy-seats, .premium-seats, .normal-seats-row-1, .normal-seats-row-2, .normal-seats-row-3, 
+.return-happy-seats, .return-premium-seats, .return-normal-seats-row-1, .return-normal-seats-row-2, .return-normal-seats-row-3{
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 200px;
+    margin-left: 20px;
+    padding: 15px;
+    justify-content: space-around;
+}
+
+.normal-seats, .return-normal-seats {
+    display: flex;
+    flex-direction: column;
+}
+
+.seats-row, .return-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.alphabet-rows, .return-alphabet-rows {
+    margin-left: 90px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 150px;
+}
+
+.next-btn {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    margin-top: 50px;
+    padding-right: 180px;
+    margin-bottom: 50px;
+}
+
+.next-btns {
+    width: 200px;
+    height: 50px;
+}

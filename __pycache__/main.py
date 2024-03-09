@@ -364,9 +364,9 @@ class Aircraft:
                 alphabets = "ABCDEF"
                 seat_id = f"{alphabets[c]}{r}"
                 seat_category = SeatCategory("normal_seat", 200)
-                if r <= 2:
+                if r <= 1:
                     seat_category = SeatCategory("premium_seat", 600)
-                if r <= 4:
+                elif r <= 2:
                     seat_category = SeatCategory("happy_seat", 400)
                 seats_data.append(Seats(seat_id, seat_category))
         return seats_data
