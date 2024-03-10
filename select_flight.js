@@ -17,13 +17,23 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const response_data = await response.json();
-        console.log(response_data)
+        // console.log("Response data : ", response_data)
+
         const depart_flight_data = response_data[0];
-        const return_flight_data = response_data[1];
+        const return_flight_data = response_data[0];
+
+        localStorage.setItem('depart_flight_data', JSON.stringify(depart_flight_data));
+        localStorage.setItem('return_flight_data', JSON.stringify(return_flight_data));
+
+        // console.log("depart_flight_data", depart_flight_data)
 
         // Departure flight label
         const departLabelContainer = document.querySelector(".depart-label");
         departLabelContainer.textContent = `Departure : ${depart_flight_data[0]["starting_location"]} --> ${depart_flight_data[0]["destination"]}`;
+        
+        // Departure date label
+        const departLabelContainers = document.querySelector(".depart-labels");
+        departLabelContainers.textContent = `Date : ${depart_flight_data[0]["departure_date"]}`;
 
         // Departure flight details
         const departContainer = document.getElementById("flight-detail-each-item");
@@ -45,6 +55,10 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
         // Return flight label
         const return_label = document.querySelector(".return-label");
         return_label.textContent = `Return : ${return_flight_data[0]["starting_location"]} --> ${return_flight_data[0]["destination"]}`;
+
+        // Return date label
+        const return_labels = document.querySelector(".return-labels");
+        return_labels.textContent = `Return : ${return_flight_data[0]["departure_date"]}`;
 
         // Return flight details
         const returnContainer = document.getElementById("flight-return-detail-each-item");
@@ -71,12 +85,13 @@ let depart_data = [];
 let return_data = [];
 
 function selectFlight(type, index, button) {
+
+    const new_input_depart_date = JSON.parse(localStorage.getItem('depart_flight_data'));
+
+
     const flightDetails = {
-        departure_time: button.parentNode.querySelector('.depart-time-label').textContent,
-        arrival_time: button.parentNode.querySelector('.arrive-time-label').textContent,
         flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
-        aircraft_number: button.parentNode.querySelector('.aircraft_number-label').textContent,
-        cost: button.textContent.split(' ')[0] // Extracting cost value
+        departure_date: new_input_depart_date[0]["departure_date"]
     };
 
     if (type === 'depart') {

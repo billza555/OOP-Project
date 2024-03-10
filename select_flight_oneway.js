@@ -34,10 +34,10 @@ async function show_one_way_flight(new_input_from, new_input_to, new_input_depar
             const element = document.createElement("div");
             element.innerHTML = `
                     
-                <label class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</label>
-                <label class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</label>
-                <label class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</label>
-                <label class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
+                <label  class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</label>
+                <label  class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</label>
+                <label  class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</label>
+                <label  class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
                 
                 <input type="radio" class="btn-check" name="btnradio" id="btnradio${index}" autocomplete="off" checked>
                 <label class="btn btn-outline-primary" for="btnradio${index}" onclick="selectFlight('depart', ${index}, this)">${data["cost"]}</label>

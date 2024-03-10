@@ -70,12 +70,13 @@ function to_select_seat() {
 
         const first_passenger_info = {
             title: document.getElementById(`title-input`).value,
-            firstName: document.getElementById(`passenger-first-name`).value,
-            middleName: document.getElementById(`passenger-middle-name`).value,
-            lastName: document.getElementById(`passenger-last-name`).value,
-            birthDate: document.getElementById(`birth_date`).value,
-            phone_number: document.getElementById(`passenger-phone-number`),
+            first_name: document.getElementById(`passenger-first-name`).value,
+            middle_name: document.getElementById(`passenger-middle-name`).value,
+            last_name: document.getElementById(`passenger-last-name`).value,
+            birthday: document.getElementById(`birth_date`).value,
+            phone_number: document.getElementById(`passenger-phone-number`).value,
             email: document.getElementById(`passenger-email`).value
+
         };
     
         passenger_data.push(first_passenger_info)
@@ -84,10 +85,10 @@ function to_select_seat() {
 
             const passengerInfo = {
                 title: document.getElementById(`title-input_${i + 1}`).value,
-                firstName: document.getElementById(`passenger-first-name_${i + 1}`).value,
-                middleName: document.getElementById(`passenger-middle-name_${i + 1}`).value,
-                lastName: document.getElementById(`passenger-last-name_${i + 1}`).value,
-                birthDate: document.getElementById(`birth_date_${i + 1}`).value
+                first_name: document.getElementById(`passenger-first-name_${i + 1}`).value,
+                middle_name: document.getElementById(`passenger-middle-name_${i + 1}`).value,
+                last_name: document.getElementById(`passenger-last-name_${i + 1}`).value,
+                birthday: document.getElementById(`birth_date_${i + 1}`).value
                 };
 
             passenger_data.push(passengerInfo);
@@ -96,11 +97,11 @@ function to_select_seat() {
     } else {
         const first_passenger_info = {
             title: document.getElementById(`title-input`).value,
-            firstName: document.getElementById(`passenger-first-name`).value,
-            middleName: document.getElementById(`passenger-middle-name`).value,
-            lastName: document.getElementById(`passenger-last-name`).value,
-            birthDate: document.getElementById(`birth_date`).value,
-            phone_number: document.getElementById(`passenger-phone-number`),
+            first_name: document.getElementById(`passenger-first-name`).value,
+            middle_name: document.getElementById(`passenger-middle-name`).value,
+            last_name: document.getElementById(`passenger-last-name`).value,
+            birthday: document.getElementById(`birth_date`).value,
+            phone_number: document.getElementById(`passenger-phone-number`).value,
             email: document.getElementById(`passenger-email`).value
         };
     

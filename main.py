@@ -53,26 +53,28 @@ class AirportSystem:
 
         for flight_instance in self.__flight_instance_list:
             if flight_instance.starting_location.name == starting_location and flight_instance.destination.name == destination and flight_instance.date == depart_date:
-                flight_instance_info = {"starting_location": starting_location,
-                                        "destination": destination,
-                                        "departure_time": flight_instance.departure_time,
+                flight_instance_info = {"departure_time": flight_instance.departure_time,
                                         "arrival_time": flight_instance.arrival_time,
                                         "flight_number": flight_instance.flight_number,
                                         "aircraft_number": flight_instance.aircraft.aircraft_number,
-                                        "cost": flight_instance.cost}
+                                        "cost": flight_instance.cost,
+                                        "departure_date": depart_date,
+                                        "starting_location": starting_location,
+                                        "destination": destination}
                 
                 departing_flight_instance.append(flight_instance_info)
 
         if return_date != None:
             for flight_instance in self.__flight_instance_list:
                 if flight_instance.destination.name == starting_location and flight_instance.starting_location.name == destination and flight_instance.date == return_date:
-                    flight_instance_info = {"starting_location": destination,
-                                            "destination": starting_location,
-                                            "departure_time": flight_instance.departure_time,
+                    flight_instance_info = {"departure_time": flight_instance.departure_time,
                                             "arrival_time": flight_instance.arrival_time,
                                             "flight_number": flight_instance.flight_number,
                                             "aircraft_number": flight_instance.aircraft.aircraft_number,
-                                            "cost": flight_instance.cost}
+                                            "cost": flight_instance.cost,
+                                            "departure_date": return_date,
+                                            "starting_location": starting_location,
+                                            "destination": destination}
 
                     returning_flight_instance.append(flight_instance_info)
 
@@ -83,26 +85,26 @@ class AirportSystem:
             if flight_instance.flight_number == flight_number and flight_instance.date == date:
                 return flight_instance  
             
-    def pay_by_qr(self, reservation):
-        reservation = self.create_reservation_for_paid(reservation, transaction)
+    def pay_by_qr(self, flight_instance_list, passenger_list, flight_seats_list):
+        reservation = self.create_reservation_for_paid(flight_instance_list, passenger_list, flight_seats_list)
         if reservation:
             payment_method = Qr()
             transaction = Transaction(payment_method)
             reservation.transaction = transaction
             reservation.generate_booking_reference()
             self.__reservation_list.append(reservation)
-            return "success"
+            return reservation
         return "error"
 
-    def pay_by_credit_card(self, card_number, cardholder_name, expiry_date, cvv, reservation_data):
-        reservation = self.create_reservation_for_paid(reservation_data)
+    def pay_by_credit_card(self, card_number, cardholder_name, expiry_date, cvv, flight_instance_list, passenger_list, flight_seats_list):
+        reservation = self.create_reservation_for_paid(flight_instance_list, passenger_list, flight_seats_list)
         if reservation:
             payment_method = CreditCard(card_number, cardholder_name, expiry_date, cvv)
             transaction = Transaction(payment_method)
             reservation.transaction = transaction
             reservation.generate_booking_reference()
             self.__reservation_list.append(reservation)
-            return "success"
+            return reservation
         return "error"
 
     def get_service(self, service_name):
@@ -111,16 +113,50 @@ class AirportSystem:
                 return service
         return None
     
-    def create_reservation_for_paid(self, reservation_data):
+    # #Reservation
+    # {
+    #     flight_instance_list: [{ขาไป},{ขากลับ}]
+    #     passenger_list: [{passenger1},{passenger2}, ...]
+    #     flight_seats_list: [[seat1, seat2, ...], [seat1, seat2, ...]]
+    #     #แต่ละ list คือสำหรับ flight_instance แต่ละตัว ใน list ย่อยมี seat เท่ากับจำนวน passenger
+    # }
+
+    # #Flight_instance
+    # {
+    #     flight_number: str,
+    #     date: str
+    # }
+    
+    # #Passenger
+    # {
+    #     title: str,
+    #     first_name: str,
+    #     middle_name: str,
+    #     last_name: str,
+    #     birthday: str,
+    #     phone_number: str,
+    #     email: str,
+    #     service_list: [{service1}, {service2}, ...]
+    # }
+    
+    # #Service
+    # {
+    #     service_name: str,
+    #     price_per_unit: int
+    # }
+    
+    # #flight_seat
+    # {
+    #     seat_number: str,
+    # }
+    
+    
+    def create_reservation_for_paid(self, flight_instance_list, passenger_list, flight_seats_list):
         reservation = Reservation()
-        flight_instance_list = reservation_data[0]
-        passenger_list  = reservation_data[1]
-        flight_seats_list = reservation_data[2]
-        
         #0 = title, 1 = first_name, 2 = middle_name, 3 = last_name, 4 = birthday, 5 = phone_number, 6 = email, 7 = service_list
         for passenger_data in passenger_list:
-            passenger = Passenger(passenger_data[0], passenger_data[1], passenger_data[2], passenger_data[3], passenger_data[4], passenger_data[5], passenger_data[6])
-            service_list = passenger_data[7]
+            passenger = Passenger(passenger_data["title"], passenger_data["first_name"], passenger_data["middle_name"], passenger_data["last_name"], passenger_data["birthday"], passenger_data["phone_number"], passenger_data["email"])
+            service_list = passenger_data["service_list"]
             for service_data in service_list:
                 #0 = service_name, 1 = price_per_unit
                 service = self.get_service(service_data[0])
@@ -129,18 +165,23 @@ class AirportSystem:
         
         #0 = flight_number, 1 = date
         for flight_instance_data in flight_instance_list:
-            flight_instance = self.get_flight_instance(flight_instance_data[0], flight_instance_data[1])
+            flight_instance = self.get_flight_instance(flight_instance_data["flight_number"], flight_instance_data["date"])
             reservation.add_flight_instance(flight_instance)
         
         for index, flight_instance in enumerate(reservation.flight_instances_list):
             new_flight_seat_list = []
-            
+            print("flight_seats_list at index:", index)
             for flight_seat_number in flight_seats_list[index]:
+                print(flight_seat_number)
                 flight_seat = flight_instance.get_flight_seat(flight_seat_number)
-                if flight_seat.occupied:
+                print(flight_seat)
+                print(flight_seat.occupied)
+                if not flight_seat or flight_seat.occupied:
+                    print("flight_seat not found or occupied")
                     return None
                 flight_seat.occupied = True
                 new_flight_seat_list.append(flight_seat)
+                    
                 
             reservation.add_flight_seat(new_flight_seat_list)
 
@@ -182,6 +223,10 @@ class Reservation:
     @property
     def transaction(self):
         return self.__transaction
+    
+    @transaction.setter
+    def transaction(self, transaction):
+        self.__transaction = transaction
 
     @property
     def booking_reference(self):
@@ -201,7 +246,7 @@ class Reservation:
         self.__flight_instance_list.append(flight_instance)
         
     def generate_booking_reference(self):
-        split_uuid = str(self.__booking_reference).split("-")
+        split_uuid = str(uuid4()).split("-")
         short_uuid = split_uuid[0] + split_uuid[1]
         self.__booking_reference = short_uuid
     
@@ -341,6 +386,7 @@ class FlightInstance(Flight):
 
     def get_flight_seat(self, seat_number):
         for flight_seat in self.__flight_seat_list:
+            #print(flight_seat.seat_number, seat_number)
             if flight_seat.seat_number == seat_number:
                 return flight_seat
     
@@ -456,6 +502,10 @@ class Service:
     @property
     def total_cost(self):
         return self.__total_cost
+    
+    @property
+    def service_name(self):
+        return self.__service_name
 
     @total_cost.setter
     def total_cost(self, total_cost):
@@ -476,6 +526,8 @@ class Baggage(Service):
 nokair = AirportSystem()
 nokair.airport_list.append(Airport("Don Mueang", "DMK"))
 nokair.airport_list.append(Airport("Chiang Mai", "CNX"))
+nokair.airport_list.append(Airport("Phuket", "HKT"))
+nokair.airport_list.append(Airport("Hat Yai", "HDY"))
 nokair.flight_list.append(Flight(nokair.airport_list[0], nokair.airport_list[1]))
 nokair.flight_list.append(Flight(nokair.airport_list[1], nokair.airport_list[0]))
 
