@@ -68,5 +68,7 @@ function prepare_data(){
     // }
 
     // console.log(localStorage.getItem('reservation'))
+    document.location.href = "payment_success.html";
+
 
 }

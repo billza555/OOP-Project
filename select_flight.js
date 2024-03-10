@@ -95,7 +95,7 @@ function selectFlight(type, index, button) {
 
         const flightDetails = {
             flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
-            departure_date: new_input_depart_date[0]["departure_date"]
+            date: new_input_depart_date[0]["departure_date"]
         };
 
         if (depart_data.length > 0) {
@@ -109,7 +109,7 @@ function selectFlight(type, index, button) {
 
         const flightDetails = {
             flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
-            departure_date: new_input_depart_date[0]["departure_date"]
+            date: new_input_depart_date[0]["departure_date"]
         };
 
         if (return_data.length > 0) {
