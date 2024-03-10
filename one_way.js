@@ -126,7 +126,9 @@ function search_flights() {
             localStorage.setItem('type', 'one_way');
 
             document.location.href = "select_flight_oneway.html";
+
       } else {
-            alert("กรุณาป้อนข้อมูลให้ครบ");
+            
+            alert("Please enter complete informations.");
       }
 }

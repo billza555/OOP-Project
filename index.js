@@ -86,7 +86,7 @@ function search_flight() {
 
       } else {    
 
-            alert("กรุณาป้อนข้อมูลให้ครบ");
+            alert("Please enter complete informations.");
       }
 
 }
