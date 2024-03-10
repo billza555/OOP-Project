@@ -31,10 +31,10 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
         depart_flight_data.forEach((data, index) => {
             const element = document.createElement("div");
             element.innerHTML = `
-                    <label for="depart-time" class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</label>
-                    <label for="arrive-time" class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</label>
-                    <label for="flight-number" class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</label>
-                    <label for="aircraft_number" class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
+                    <p class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</p>
+                    <p class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</p>
+                    <p class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</p>
+                    <p class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</p>
 
                     <input type="radio" class="btn-check" name="departRadio" id="departBtnRadio${index}" autocomplete="off">
                     <label class="btn btn-outline-primary choose-flight-btn flight-detail-items-i" for="departBtnRadio${index}" id="selectBtn" onclick="selectFlight('depart', ${index}, this)">${data["cost"]} Baht</label>
@@ -52,10 +52,10 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
         return_flight_data.forEach((data, index)=> {
             const element = document.createElement("div");
             element.innerHTML = `
-                <label for="depart-time" class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</label>
-                <label for="arrive-time" class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</label>
-                <label for="flight-number" class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</label>
-                <label for="aircraft_number" class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
+                <p class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</p>
+                <p class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</p>
+                <p class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</p>
+                <p class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</p>
 
                 <input type="radio" class="btn-check" name="returnRadio" id="returnBtnRadio${index}" autocomplete="off">
                 <label class="btn btn-outline-primary choose-flight-btn flight-detail-items-i" for="returnBtnRadio${index}" id="selectBtn" onclick="selectFlight('return', ${index}, this)">${data["cost"]} Baht</label>
