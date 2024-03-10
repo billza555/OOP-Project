@@ -201,11 +201,11 @@ function save_service_data(){
       localStorage.setItem('passenger_data_return',JSON.stringify(new_passenger_data_return));
       console.log(localStorage.getItem('passenger_data_depart'))
 
-      
+      go_to_pay_page()
   }
   
-  function go_to_pay_page(){
+  function go_to_pay_page() {
 
-      // document.location.href = "pay_page.html";
+      document.location.href = "pay_page.html";
       //#0 = title, 1 = first_name, 2 = middle_name, 3 = last_name, 4 = birthday, 5 = phone_number, 6 = email, 7 = service_list
   }

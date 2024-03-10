@@ -28,6 +28,9 @@ async function show_one_way_flight(new_input_from, new_input_to, new_input_depar
         const departLabelContainer = document.querySelector(".depart-label");
         departLabelContainer.textContent = `Departure : ${departFlights[0]["starting_location"]} --> ${departFlights[0]["destination"]}`;
 
+        const departLabelContainers = document.querySelector(".depart-labels");
+        departLabelContainers.textContent = `Departure : ${departFlights[0]["departure_date"]}`;
+
         const container = document.getElementById("flight-detail-each-item");
 
         departFlights.forEach((data,index) => {

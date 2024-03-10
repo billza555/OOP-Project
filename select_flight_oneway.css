@@ -26,7 +26,7 @@
     border-radius: 15px;
 }
 
-.depart-label, .return-label {
+.depart-label, .depart-labels {
     padding-left: 10px;
     font-size: 1.85rem;
     padding: 15px;

@@ -20,7 +20,10 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
         // console.log("Response data : ", response_data)
 
         const depart_flight_data = response_data[0];
-        const return_flight_data = response_data[0];
+        const return_flight_data = response_data[1];
+
+        console.log("Depart_flight_list", depart_flight_data)
+        console.log("Return", return_flight_data)
 
         localStorage.setItem('depart_flight_data', JSON.stringify(depart_flight_data));
         localStorage.setItem('return_flight_data', JSON.stringify(return_flight_data));
@@ -41,10 +44,10 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
         depart_flight_data.forEach((data, index) => {
             const element = document.createElement("div");
             element.innerHTML = `
-                    <p class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</p>
-                    <p class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</p>
-                    <p class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</p>
-                    <p class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</p>
+                    <label class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</label>
+                    <label class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</label>
+                    <label class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</label>
+                    <label class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
 
                     <input type="radio" class="btn-check" name="departRadio" id="departBtnRadio${index}" autocomplete="off">
                     <label class="btn btn-outline-primary choose-flight-btn flight-detail-items-i" for="departBtnRadio${index}" id="selectBtn" onclick="selectFlight('depart', ${index}, this)">${data["cost"]} Baht</label>
@@ -66,10 +69,10 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
         return_flight_data.forEach((data, index)=> {
             const element = document.createElement("div");
             element.innerHTML = `
-                <p class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</p>
-                <p class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</p>
-                <p class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</p>
-                <p class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</p>
+                <label class="depart-time-label flight-detail-items-i" id="depart-time">${data["departure_time"]}</label>
+                <label class="arrive-time-label flight-detail-items-i" id="arrive-time">${data["arrival_time"]}</label>
+                <label class="flight-number-label flight-detail-items-i" id="flight_number">${data["flight_number"]}</label>
+                <label class="aircraft_number-label flight-detail-items-i" id="aircraft_number">${data["aircraft_number"]}</label>
 
                 <input type="radio" class="btn-check" name="returnRadio" id="returnBtnRadio${index}" autocomplete="off">
                 <label class="btn btn-outline-primary choose-flight-btn flight-detail-items-i" for="returnBtnRadio${index}" id="selectBtn" onclick="selectFlight('return', ${index}, this)">${data["cost"]} Baht</label>
@@ -88,13 +91,13 @@ function selectFlight(type, index, button) {
 
     const new_input_depart_date = JSON.parse(localStorage.getItem('depart_flight_data'));
 
-
-    const flightDetails = {
-        flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
-        departure_date: new_input_depart_date[0]["departure_date"]
-    };
-
     if (type === 'depart') {
+
+        const flightDetails = {
+            flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
+            departure_date: new_input_depart_date[0]["departure_date"]
+        };
+
         if (depart_data.length > 0) {
             depart_data[0] = flightDetails;
         } else {
@@ -103,6 +106,12 @@ function selectFlight(type, index, button) {
     }
 
     if (type === 'return') {
+
+        const flightDetails = {
+            flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
+            departure_date: new_input_depart_date[0]["departure_date"]
+        };
+
         if (return_data.length > 0) {
             return_data[0] = flightDetails;
         } else {

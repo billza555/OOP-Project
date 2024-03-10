@@ -1,8 +1,9 @@
 const api = "http://127.0.0.1:8000";
 
 document.addEventListener('DOMContentLoaded', function () {
-    if(localStorage.getItem("type") == "round_trip")
-    {
+    console.log(localStorage.getItem("type"))
+    if (localStorage.getItem("type") === "round_trip") {
+
         const flight_list = JSON.parse(localStorage.getItem('select_flight'));
         const depart_date = JSON.parse(localStorage.getItem('input_depart_date'));
         const return_date = JSON.parse(localStorage.getItem('input_return_date'));
@@ -17,9 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // console.log("new flight number list : ", flight_number_list)
 
         show_all_seats(flight_number_list, date_list);
-    }
-    else
-    {
+    
+    } else {
+
         const flight_list = JSON.parse(localStorage.getItem('select_flight'));
         const depart_date = JSON.parse(localStorage.getItem('input_depart_date'));
         const date_list = [depart_date]
@@ -38,6 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
 //show all seats of flight instance
 async function show_all_seats(flight_number_list, date_list) {
     try {
+        
+        console.log("flight number list : ", flight_number_list)
+        console.log("date_list : ", date_list)
+
         const response_1 = await fetch(`${api}/get_all_seats?flight_number=${flight_number_list[0]}&date=${date_list[0]}`);
         const depart_seats_list = await response_1.json();
         localStorage.setItem('depart_seat_list', JSON.stringify(depart_seats_list));
@@ -185,7 +190,7 @@ async function show_all_seats(flight_number_list, date_list) {
         // normal seats
 
         // row-1
-        if(localStorage.getItem("type") == "round_trip")
+        if(localStorage.getItem("type") === "round_trip")
         {
         const response_2 = await fetch(`${api}/get_all_seats?flight_number=${flight_number_list[1]}&date=${date_list[1]}`);
         const return_seats_list = await response_2.json();
@@ -334,6 +339,8 @@ let len_passenger = JSON.parse(localStorage.getItem('passenger_num'));
 
 let selectedDepartSeats = []; // Declare a global array to store selected depart seats
 let selectedReturnSeats = []
+let depart_seat = [];
+let return_seat = []
 
 function select_seats(type, index, button) {
     console.log(index)
@@ -349,10 +356,18 @@ function select_seats(type, index, button) {
 
         if (!isSeatSelected) {
 
-            selectedDepartSeats.push({'seats_number':depart_selected_seat});
+            const seat_detail = 
+            {
+            seat_number: depart_selected_seat,
+            seat_category: depart_seats_list[index]._Seats__seat_category._SeatCategory__name,
+            seat_price: depart_seats_list[index]._Seats__seat_category._SeatCategory__price
+            };
+
+            selectedDepartSeats.push(depart_selected_seat);
 
         if (selectedDepartSeats.length <= len_passenger) 
         {
+            depart_seat.push(seat_detail);
             // Change the button style or add visual indication as needed
 
             // Example: Change button color
@@ -363,7 +378,7 @@ function select_seats(type, index, button) {
             const button = document.getElementById("normal-seat-"+index);
             button.click();
             button.classList.remove("select-seat")
-            const seatIndex = selectedDepartSeats.indexOf({'seats_number':depart_selected_seat});
+            const seatIndex = selectedDepartSeats.indexOf(depart_selected_seat);
             selectedDepartSeats.splice(seatIndex, 1);
             console.log("button", button)
         }
@@ -371,15 +386,18 @@ function select_seats(type, index, button) {
     else 
     {
         // If the seat is already selected, remove it from the array
-        const seatIndex = selectedDepartSeats.indexOf({'seats_number':depart_selected_seat});
+        const seatIndex = selectedDepartSeats.indexOf(depart_selected_seat);
         selectedDepartSeats.splice(seatIndex, 1);
+
+        // Remove the seat from the depart_seat array
+        depart_seat = depart_seat.filter(seat => seat.seat_number !== depart_selected_seat);
 
         // Remove the visual indication (change button style as needed)
 
         // Example: Remove selected-seat class
         button.classList.remove('selected-seat');
     }
-        console.log("Depart Seat", {'seats_number':selectedDepartSeats});
+        console.log("Depart Seat", selectedDepartSeats);
     }
     else
     {
@@ -392,24 +410,36 @@ function select_seats(type, index, button) {
 
     if (!isSeatSelected) {
 
+        const seat_detail = 
+        {
+            seat_number: return_selected_seat,
+            seat_category: return_seats_list[index]._Seats__seat_category._SeatCategory__name,
+            seat_price: return_seats_list[index]._Seats__seat_category._SeatCategory__price
+        };
 
-        selectedReturnSeats.push({'seats_number':return_selected_seat});
+        selectedReturnSeats.push(return_selected_seat);
 
         if (selectedReturnSeats.length <= len_passenger) {
+            return_seat.push(seat_detail);
+            // Change the button style or add visual indication as needed
 
+            // Example: Change button color
             button.classList.add('selected-seat');
         } else {
             const button = document.getElementById("return-normal-seat-"+index);
             button.click();
             button.classList.remove("select-seat")
-            const seatIndex = selectedReturnSeats.indexOf({'seats_number':return_selected_seat});
+            const seatIndex = selectedReturnSeats.indexOf(return_selected_seat);
             selectedReturnSeats.splice(seatIndex, 1);
             console.log("button", button)
         }
     } else {
         // If the seat is already selected, remove it from the array
-        const seatIndex = selectedReturnSeats.indexOf({'seats_number':return_selected_seat});
+        const seatIndex = selectedReturnSeats.indexOf(return_selected_seat);
         selectedReturnSeats.splice(seatIndex, 1);
+
+        // Remove the seat from the depart_seat array
+        return_seat = return_seat.filter(seat => seat.seat_number !== return_selected_seat);
 
         // Remove the visual indication (change button style as needed)
 

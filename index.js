@@ -80,7 +80,7 @@ function search_flight() {
             localStorage.setItem('input_depart_date', JSON.stringify(input_depart_date));
             localStorage.setItem('input_return_date', JSON.stringify(input_return_date));
             localStorage.setItem('passenger_num', JSON.stringify(passenger_num));
-            localStorage.setItem('type', 'one_way');
+            localStorage.setItem('type', 'round_trip');
 
             document.location.href = "select_flight.html";
 
