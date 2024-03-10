@@ -343,10 +343,8 @@ let depart_seat = [];
 let return_seat = []
 
 function select_seats(type, index, button) {
-    console.log(index)
-    console.log(button)
-    if(type == "depart")
-    {
+
+    if (type == "depart") {
         const depart_seats_list = JSON.parse(localStorage.getItem('depart_seat_list'));
         console.log("Depart seat list : ", depart_seats_list)
 
@@ -356,8 +354,7 @@ function select_seats(type, index, button) {
 
         if (!isSeatSelected) {
 
-            const seat_detail = 
-            {
+            const seat_detail = {
             seat_number: depart_selected_seat,
             seat_category: depart_seats_list[index]._Seats__seat_category._SeatCategory__name,
             seat_price: depart_seats_list[index]._Seats__seat_category._SeatCategory__price
@@ -365,97 +362,113 @@ function select_seats(type, index, button) {
 
             selectedDepartSeats.push(depart_selected_seat);
 
-        if (selectedDepartSeats.length <= len_passenger) 
-        {
-            depart_seat.push(seat_detail);
-            // Change the button style or add visual indication as needed
+            if (selectedDepartSeats.length <= len_passenger) {
+                depart_seat.push(seat_detail);
+                // Change the button style or add visual indication as needed
 
-            // Example: Change button color
-            button.classList.add('selected-seat');
-        } 
-        else 
-        {
-            const button = document.getElementById("normal-seat-"+index);
-            button.click();
-            button.classList.remove("select-seat")
+                // Example: Change button color
+                button.classList.add('selected-seat');
+            } else {
+                const button = document.getElementById("normal-seat-"+index);
+                button.click();
+                button.classList.remove("select-seat")
+                const seatIndex = selectedDepartSeats.indexOf(depart_selected_seat);
+                selectedDepartSeats.splice(seatIndex, 1);
+                console.log("button", button)
+            }
+
+        } else {
+        // If the seat is already selected, remove it from the array
             const seatIndex = selectedDepartSeats.indexOf(depart_selected_seat);
             selectedDepartSeats.splice(seatIndex, 1);
-            console.log("button", button)
-        }
-    } 
-    else 
-    {
-        // If the seat is already selected, remove it from the array
-        const seatIndex = selectedDepartSeats.indexOf(depart_selected_seat);
-        selectedDepartSeats.splice(seatIndex, 1);
 
-        // Remove the seat from the depart_seat array
-        depart_seat = depart_seat.filter(seat => seat.seat_number !== depart_selected_seat);
+            // Remove the seat from the depart_seat array
+            depart_seat = depart_seat.filter(seat => seat.seat_number !== depart_selected_seat);
 
         // Remove the visual indication (change button style as needed)
 
         // Example: Remove selected-seat class
-        button.classList.remove('selected-seat');
-    }
-        console.log("Depart Seat", selectedDepartSeats);
-    }
-    else
-    {
-        const return_seats_list = JSON.parse(localStorage.getItem('return_seat_list'));
-        console.log("Return seat list : ", return_seats_list)
+            button.classList.remove('selected-seat');
+        }
 
-        const return_selected_seat = button.parentNode.querySelector('.return-seat-number').textContent
+            localStorage.setItem("seat_depart", JSON.stringify(selectedDepartSeats))
+            console.log("Depart Seat", selectedDepartSeats);
 
-        const isSeatSelected = selectedReturnSeats.includes(return_selected_seat);
-
-    if (!isSeatSelected) {
-
-        const seat_detail = 
-        {
-            seat_number: return_selected_seat,
-            seat_category: return_seats_list[index]._Seats__seat_category._SeatCategory__name,
-            seat_price: return_seats_list[index]._Seats__seat_category._SeatCategory__price
-        };
-
-        selectedReturnSeats.push(return_selected_seat);
-
-        if (selectedReturnSeats.length <= len_passenger) {
-            return_seat.push(seat_detail);
-            // Change the button style or add visual indication as needed
-
-            // Example: Change button color
-            button.classList.add('selected-seat');
         } else {
-            const button = document.getElementById("return-normal-seat-"+index);
-            button.click();
-            button.classList.remove("select-seat")
+            const return_seats_list = JSON.parse(localStorage.getItem('return_seat_list'));
+            console.log("Return seat list : ", return_seats_list)
+
+            const return_selected_seat = button.parentNode.querySelector('.return-seat-number').textContent
+
+            const isSeatSelected = selectedReturnSeats.includes(return_selected_seat);
+
+        if (!isSeatSelected) {
+
+            const seat_detail = {
+                seat_number: return_selected_seat,
+                seat_category: return_seats_list[index]._Seats__seat_category._SeatCategory__name,
+                seat_price: return_seats_list[index]._Seats__seat_category._SeatCategory__price
+            };
+
+            selectedReturnSeats.push(return_selected_seat);
+
+            if (selectedReturnSeats.length <= len_passenger) {
+                return_seat.push(seat_detail);
+                // Change the button style or add visual indication as needed
+
+                // Example: Change button color
+                button.classList.add('selected-seat');
+
+            } else {
+                const button = document.getElementById("return-normal-seat-"+index);
+                button.click();
+                button.classList.remove("select-seat")
+                const seatIndex = selectedReturnSeats.indexOf(return_selected_seat);
+                selectedReturnSeats.splice(seatIndex, 1);
+                console.log("button", button)
+            }
+
+        } else {
+            // If the seat is already selected, remove it from the array
             const seatIndex = selectedReturnSeats.indexOf(return_selected_seat);
             selectedReturnSeats.splice(seatIndex, 1);
-            console.log("button", button)
+
+            // Remove the seat from the depart_seat array
+            return_seat = return_seat.filter(seat => seat.seat_number !== return_selected_seat);
+
+            // Remove the visual indication (change button style as needed)
+
+            // Example: Remove selected-seat class
+            button.classList.remove('selected-seat');
         }
-    } else {
-        // If the seat is already selected, remove it from the array
-        const seatIndex = selectedReturnSeats.indexOf(return_selected_seat);
-        selectedReturnSeats.splice(seatIndex, 1);
 
-        // Remove the seat from the depart_seat array
-        return_seat = return_seat.filter(seat => seat.seat_number !== return_selected_seat);
-
-        // Remove the visual indication (change button style as needed)
-
-        // Example: Remove selected-seat class
-        button.classList.remove('selected-seat');
+        localStorage.setItem("seat_return", JSON.stringify(selectedReturnSeats))
+        console.log("Return Seat", selectedReturnSeats);
+        
     }
-    console.log("Return Seat", selectedReturnSeats);
-    }
+
 }
 
 function to_select_service() {
-    localStorage.setItem("seat_depart", selectedDepartSeats)
-    if(localStorage.getItem("type") == "round_trip")
-        localStorage.setItem("seat_return", selectedReturnSeats)
-    document.location.href = "service.html";
 
+    let selected_seats = []
+
+    let departSeat = JSON.parse(localStorage.getItem('seat_depart'));
+    let returntSeat = JSON.parse(localStorage.getItem('seat_return'));
+
+    selected_seats.push(departSeat)
+    
+    if (localStorage.getItem("type") == "round_trip") {
+
+        selected_seats.push(returntSeat)
+    }
+    
+    console.log("Selected seat : ", selected_seats)
+
+    localStorage.setItem('selected_seats', JSON.stringify(selected_seats));
+
+    
+    document.location.href = "service.html";
 }
 
 function is_one_way()

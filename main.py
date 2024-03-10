@@ -83,8 +83,10 @@ class AirportSystem:
     def get_flight_instance(self, flight_number, date):
         for flight_instance in self.__flight_instance_list:
             if flight_instance.flight_number == flight_number and flight_instance.date == date:
-                return flight_instance  
-            
+                return flight_instance 
+        print(f"No matching flight_instance found for flight_number {flight_number} and date {date}")
+        return None
+    
     def pay_by_qr(self, flight_instance_list, passenger_list, flight_seats_list):
         reservation = self.create_reservation_for_paid(flight_instance_list, passenger_list, flight_seats_list)
         if reservation:
@@ -166,23 +168,33 @@ class AirportSystem:
         #0 = flight_number, 1 = date
         for flight_instance_data in flight_instance_list:
             flight_instance = self.get_flight_instance(flight_instance_data["flight_number"], flight_instance_data["date"])
-            reservation.add_flight_instance(flight_instance)
         
+        # Check if flight_instance is found
+        if flight_instance is None:
+            print(f"No matching flight_instance found for flight_number {flight_instance_data['flight_number']} and date {flight_instance_data['date']}")
+            return None
+
+        reservation.add_flight_instance(flight_instance)
+
         for index, flight_instance in enumerate(reservation.flight_instances_list):
             new_flight_seat_list = []
             print("flight_seats_list at index:", index)
             for flight_seat_number in flight_seats_list[index]:
-                print(flight_seat_number)
+                print("Flight number seat : ", flight_seat_number)
+                print("Flight Instance : ", flight_instance)
+
+                # Check if flight_seat is found
                 flight_seat = flight_instance.get_flight_seat(flight_seat_number)
-                print(flight_seat)
-                print(flight_seat.occupied)
-                if not flight_seat or flight_seat.occupied:
+                if flight_seat is None or flight_seat.occupied:
                     print("flight_seat not found or occupied")
                     return None
+
+                print("Flight seat : ", flight_seat)
+                print("Seat occupied : ", flight_seat.occupied)
+
                 flight_seat.occupied = True
                 new_flight_seat_list.append(flight_seat)
-                    
-                
+
             reservation.add_flight_seat(new_flight_seat_list)
 
         return reservation

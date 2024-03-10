@@ -31,15 +31,15 @@ async function get_all_service() {
 
         console.log("Passenger : ", passenger)
         console.log("Passenger 1 : ", passenger[0])
-        console.log("Passenger 1 name : ", passenger[0].firstName)
+        console.log("Passenger 1 name : ", passenger[0].first_name)
         
         const container= document.getElementById("response");
-        for(let i=0 ; i<passenger_num;i++){
+        for(let i = 0 ; i < passenger_num; i++) {
             let element = document.createElement("div");
                   element.innerHTML = `
                   <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                              <p class="card-text">${passenger[i].firstName} ${passenger[i].middleName} ${passenger[i].lastName}</p>
+                              <p class="card-text">${passenger[i].first_name} ${passenger[i].middle_name} ${passenger[i].last_name}</p>
                         </div>
                         <div class="form-check">
                               <input class="form-check-input" type="checkbox" value="" id="insurance${i}">
@@ -83,15 +83,15 @@ async function get_all_service() {
             
         }
 
-        if (localStorage.getItem('type')!='one_way'){
+        if (localStorage.getItem('type') != 'one_way'){
 
-        const container_return= document.getElementById("response-return");
+        const container_return = document.getElementById("response-return");
         for(let i=0 ; i<passenger_num;i++){
             let element_return = document.createElement("div");
             element_return.innerHTML = `
                   <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                              <p class="card-text">${passenger[i].firstName} ${passenger[i].middleName} ${passenger[i].lastName}</p>
+                              <p class="card-text">${passenger[i].first_name} ${passenger[i].middle_name} ${passenger[i].last_name}</p>
                         </div>
                         <div class="form-check">
                               <input class="form-check-input" type="checkbox" value="" id="insurance_returnn${i}">
@@ -173,39 +173,43 @@ function save_service_data(){
             // console.log(localStorage.getItem('passenger_added_service_depart'))
             new_passenger_data_depart.push(passenger[i])
       }
+
       localStorage.setItem('passenger_data_depart',JSON.stringify(new_passenger_data_depart));
 
       let new_passenger_data_return = []
       if (localStorage.getItem('type')!='one_way'){
-      for(let i = 0 ; i<len_passenger ; i++){
-            let service_checked = []
-            if(document.getElementById(`insurance_returnn${i}`).checked){
-                  service_checked.push(localStorage.getItem('insurance'));
+            for(let i = 0 ; i < len_passenger ; i++) {
+                  let service_checked = []
+                  if (document.getElementById(`insurance_returnn${i}`).checked) {
+                        service_checked.push([[localStorage.getItem('insurance')]]);
+                  }
+                  if (document.getElementById(`add_5kg_return${i}`).checked) {
+                        service_checked.push([[localStorage.getItem('add_5kg')]]);
+                  }
+                  if (document.getElementById(`add_10kg_return${i}`).checked) {
+                        service_checked.push([[localStorage.getItem('add_10kg')]]);
+                  }
+                  if (document.getElementById(`add_15kg_return${i}`).checked) {
+                        service_checked.push([[localStorage.getItem('add_15kg')]]);
+                  }
+                  let passenger_return = JSON.parse(localStorage.getItem('passenger_data'));
+                  passenger_return[i].service_list = service_checked
+                  // console.log(passenger_return[i])
+                  // localStorage.setItem('passenger_added_service_return',(passenger_return[i]));
+                  new_passenger_data_return.push(passenger_return[i])
             }
-            if(document.getElementById(`add_5kg_return${i}`).checked){
-                  service_checked.push(localStorage.getItem('add_5kg'));
-            }
-            if(document.getElementById(`add_10kg_return${i}`).checked){
-                  service_checked.push(localStorage.getItem('add_10kg'));
-            }
-            if(document.getElementById(`add_15kg_return${i}`).checked){
-                  service_checked.push(localStorage.getItem('add_15kg'));
-            }
-            let passenger_return = JSON.parse(localStorage.getItem('passenger_data'));
-            passenger_return[i].service_list = service_checked
-            // console.log(passenger_return[i])
-            // localStorage.setItem('passenger_added_service_return',(passenger_return[i]));
-            new_passenger_data_return.push(passenger_return[i])
       }
-      }
+
       localStorage.setItem('passenger_data_return',JSON.stringify(new_passenger_data_return));
-      console.log(localStorage.getItem('passenger_data_depart'))
+
+      console.log("Passenger data depart", localStorage.getItem('passenger_data_depart'))
 
       go_to_pay_page()
   }
   
   function go_to_pay_page() {
 
+      
       document.location.href = "pay_page.html";
       //#0 = title, 1 = first_name, 2 = middle_name, 3 = last_name, 4 = birthday, 5 = phone_number, 6 = email, 7 = service_list
   }

@@ -88,6 +88,8 @@ function to_select_seat() {
                 first_name: document.getElementById(`passenger-first-name_${i + 1}`).value,
                 middle_name: document.getElementById(`passenger-middle-name_${i + 1}`).value,
                 last_name: document.getElementById(`passenger-last-name_${i + 1}`).value,
+                phone_number: "",
+                email: "",
                 birthday: document.getElementById(`birth_date_${i + 1}`).value
                 };
 
