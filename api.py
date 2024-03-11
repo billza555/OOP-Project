@@ -53,7 +53,7 @@ def pay_by_qr(flight_instance_list : List[dict], passenger_list : List[dict], fl
     return nokair.pay_by_qr(flight_instance_list, passenger_list, flight_seats_list)
 
 @app.post("/check_in", tags=["Check In"])
-async def check_in(booking_reference: str, last_name: str):
+def check_in(booking_reference: str, last_name: str):
     return nokair.check_in(booking_reference, last_name)
 
 if __name__ == "__main__":
