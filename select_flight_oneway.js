@@ -26,11 +26,11 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date) 
 
         // Departure flight label
         const departLabelContainer = document.querySelector(".one-way-depart-label");
-        departLabelContainer.textContent = `Departure : ${depart_flight_data[0]["starting_location"]} --> ${depart_flight_data[0]["destination"]}`;
+        departLabelContainer.textContent = `Departure : ${new_input_from} --> ${new_input_to}`;
         
         // Departure date label
         const departLabelContainers = document.querySelector(".one-way-depart-labels");
-        departLabelContainers.textContent = `Date : ${depart_flight_data[0]["departure_date"]}`;
+        departLabelContainers.textContent = `Date : ${new_input_depart_date}`;
 
         // Departure flight details
         const departContainer = document.getElementById("one-way-flight-detail-each-item");

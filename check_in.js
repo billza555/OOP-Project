@@ -8,7 +8,7 @@ async function click_check_in() {
           localStorage.setItem('booking_ref', JSON.stringify(booking_ref));
           localStorage.setItem('last_name', JSON.stringify(last_name));
       
-          document.location.href = "select_ticket.html";
+          document.location.href = "boarding_pass.html";
 
     } catch (error) {
           console.error('Error:', error);

@@ -316,6 +316,7 @@ class Reservation:
             reservation_info["flight_instance_list"][location_text]["flight_seat_list"] = flight_seat_info
         
         reservation_info["passenger_list"] = self.__passenger_list
+        reservation_info["transaction"] = self.__transaction
         return reservation_info
     
     def create_boarding_pass(self, passenger):
@@ -575,7 +576,7 @@ class Service:
         self.__total_cost = total_cost
         
     def get_service_info_for_showing(self):
-        return {"service_name": self.__service_name, "price_per_unit": self.__total_cost}
+        return {"service_name": self.__service_name, "total_cost": self.__total_cost}
 
 class Insurance(Service):
     def __init__(self, service_name, price_per_unit):

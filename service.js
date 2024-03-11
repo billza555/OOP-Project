@@ -50,7 +50,7 @@ async function get_all_service() {
                                     <input class="form-check-input" type="checkbox" value="" id="insurance${i}">
                                     <label class="form-check-label" for="insurance${i}">
                                           ${insurance_data["service_name"]}
-                                          price : ${insurance_data["price_per_unit"]} Baht
+                                          price : ${insurance_data["total_cost"]} Baht
                                     </label>
                               </div>
                               <div class="form-check checked-box">
@@ -63,21 +63,21 @@ async function get_all_service() {
                                     <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="add_5kg_${i}">
                                     <label class="form-check-label" for="add_5kg_${i}">
                                           ${add_5kg_data["service_name"]} 
-                                          price : ${add_5kg_data["price_per_unit"]} Baht
+                                          price : ${add_5kg_data["total_cost"]} Baht
                                     </label>
                               </div>
                               <div class="form-check checked-box">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="add_10kg_${i}">
                                     <label class="form-check-label" for="add_10kg_${i}">
                                           ${add_10kg_data["service_name"]} 
-                                          price : ${add_10kg_data["price_per_unit"]} Baht
+                                          price : ${add_10kg_data["total_cost"]} Baht
                                     </label>
                               </div>
                               <div class="form-check checked-box">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="add_15kg_${i}">
                                     <label class="form-check-label" for="add_15kg_${i}">
                                           ${add_15kg_data["service_name"]} 
-                                          price : ${add_15kg_data["price_per_unit"]} Baht
+                                          price : ${add_15kg_data["total_cost"]} Baht
                                     </label>
                               </div>
                         </div>
