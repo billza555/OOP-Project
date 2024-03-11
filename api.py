@@ -40,6 +40,10 @@ def get_all_services():
 def get_all_airports():
     return nokair.airport_list
 
+@app.post("/show_unpaid_reservation_cost", tags=["Paying"])
+def show_unpaid_reservation_cost(flight_instance_list : List[dict], passenger_list : List[dict], flight_seats_list : List[list]):
+    return nokair.show_unpaid_reservation_cost(flight_instance_list, passenger_list, flight_seats_list)
+
 @app.post("/pay_by_credit", tags=["Paying"])
 def pay_by_credit(card_number: str, cardholder_name: str, expiry_date: str, cvv: str, flight_instance_list : List[dict], passenger_list : List[dict], flight_seats_list : List[list]):
     return nokair.pay_by_credit_card(card_number, cardholder_name, expiry_date, cvv, flight_instance_list, passenger_list, flight_seats_list)

@@ -56,8 +56,9 @@ async function show_all_seats(flight_number_list, date_list) {
         const normal_container_1 = document.getElementById("normal-seats-row-1");
         normal_container_1.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
+            console.log(data._Seats__seat_category._SeatCategory__seat_category_name)
             if (
-                data._Seats__seat_category._SeatCategory__name === "normal_seat" &&
+                data._Seats__seat_category._SeatCategory__seat_category_name === "normal_seat" &&
                 (data._Seats__seat_number === "A3" ||
                  data._Seats__seat_number === "B3" ||
                  data._Seats__seat_number === "C3")
@@ -86,7 +87,7 @@ async function show_all_seats(flight_number_list, date_list) {
         normal_container_2.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
             if (
-                data._Seats__seat_category._SeatCategory__name === "normal_seat" &&
+                data._Seats__seat_category._SeatCategory__seat_category_name === "normal_seat" &&
                 (data._Seats__seat_number === "A4" ||
                  data._Seats__seat_number === "B4" ||
                  data._Seats__seat_number === "C4")
@@ -114,7 +115,7 @@ async function show_all_seats(flight_number_list, date_list) {
         normal_container_3.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
             if (
-                data._Seats__seat_category._SeatCategory__name === "normal_seat" &&
+                data._Seats__seat_category._SeatCategory__seat_category_name === "normal_seat" &&
                 (data._Seats__seat_number === "A5" ||
                  data._Seats__seat_number === "B5" ||
                  data._Seats__seat_number === "C5")
@@ -141,7 +142,7 @@ async function show_all_seats(flight_number_list, date_list) {
         const happy_container = document.getElementById("happy-seats");
         happy_container.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
-            if (data._Seats__seat_category._SeatCategory__name === "happy_seat") {
+            if (data._Seats__seat_category._SeatCategory__seat_category_name === "happy_seat") {
                 const element = document.createElement("div");
                 if(data._FlightSeat__occupied)
                 {
@@ -164,7 +165,7 @@ async function show_all_seats(flight_number_list, date_list) {
         const premium_container = document.getElementById("premium-seats");
         premium_container.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
-            if (data._Seats__seat_category._SeatCategory__name === "premium_seat") {
+            if (data._Seats__seat_category._SeatCategory__seat_category_name === "premium_seat") {
                 const element = document.createElement("div");
                 if(data._FlightSeat__occupied)
                 {
@@ -201,7 +202,7 @@ async function show_all_seats(flight_number_list, date_list) {
         return_normal_container_1.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
             if (
-                data._Seats__seat_category._SeatCategory__name === "normal_seat" &&
+                data._Seats__seat_category._SeatCategory__seat_category_name === "normal_seat" &&
                 (data._Seats__seat_number === "A3" ||
                  data._Seats__seat_number === "B3" ||
                  data._Seats__seat_number === "C3")
@@ -230,7 +231,7 @@ async function show_all_seats(flight_number_list, date_list) {
         return_normal_container_2.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
             if (
-                data._Seats__seat_category._SeatCategory__name === "normal_seat" &&
+                data._Seats__seat_category._SeatCategory__seat_category_name === "normal_seat" &&
                 (data._Seats__seat_number === "A4" ||
                  data._Seats__seat_number === "B4" ||
                  data._Seats__seat_number === "C4")
@@ -259,7 +260,7 @@ async function show_all_seats(flight_number_list, date_list) {
         return_normal_container_3.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
             if (
-                data._Seats__seat_category._SeatCategory__name === "normal_seat" &&
+                data._Seats__seat_category._SeatCategory__seat_category_name === "normal_seat" &&
                 (data._Seats__seat_number === "A5" ||
                  data._Seats__seat_number === "B5" ||
                  data._Seats__seat_number === "C5")
@@ -287,7 +288,7 @@ async function show_all_seats(flight_number_list, date_list) {
         const return_happy_container = document.getElementById("return-happy-seats");
         return_happy_container.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
-            if (data._Seats__seat_category._SeatCategory__name === "happy_seat") {
+            if (data._Seats__seat_category._SeatCategory__seat_category_name === "happy_seat") {
                 const element = document.createElement("div");
                 if(data._FlightSeat__occupied)
                 {
@@ -311,7 +312,7 @@ async function show_all_seats(flight_number_list, date_list) {
         const return_premium_container = document.getElementById("return-premium-seats");
         return_premium_container.innerHTML = ''; // Clear previous content
         depart_seats_list.forEach((data, index) => {
-            if (data._Seats__seat_category._SeatCategory__name === "premium_seat") {
+            if (data._Seats__seat_category._SeatCategory__seat_category_name === "premium_seat") {
                 const element = document.createElement("div");
                 if(data._FlightSeat__occupied)
                 {
@@ -356,7 +357,7 @@ function select_seats(type, index, button) {
 
             const seat_detail = {
             seat_number: depart_selected_seat,
-            seat_category: depart_seats_list[index]._Seats__seat_category._SeatCategory__name,
+            seat_category: depart_seats_list[index]._Seats__seat_category._SeatCategory__seat_category_name,
             seat_price: depart_seats_list[index]._Seats__seat_category._SeatCategory__price
             };
 
@@ -406,7 +407,7 @@ function select_seats(type, index, button) {
 
             const seat_detail = {
                 seat_number: return_selected_seat,
-                seat_category: return_seats_list[index]._Seats__seat_category._SeatCategory__name,
+                seat_category: return_seats_list[index]._Seats__seat_category._SeatCategory__seat_category_name,
                 seat_price: return_seats_list[index]._Seats__seat_category._SeatCategory__price
             };
 

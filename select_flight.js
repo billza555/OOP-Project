@@ -17,7 +17,7 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const response_data = await response.json();
-        // console.log("Response data : ", response_data)
+        console.log("Response data : ", response_data)
 
         const depart_flight_data = response_data[0];
         const return_flight_data = response_data[1];
@@ -32,11 +32,11 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
 
         // Departure flight label
         const departLabelContainer = document.querySelector(".depart-label");
-        departLabelContainer.textContent = `Departure : ${depart_flight_data[0]["starting_location"]} --> ${depart_flight_data[0]["destination"]}`;
+        departLabelContainer.textContent = `Departure : ${new_input_from} --> ${new_input_to}`;
         
         // Departure date label
         const departLabelContainers = document.querySelector(".depart-labels");
-        departLabelContainers.textContent = `Date : ${depart_flight_data[0]["departure_date"]}`;
+        departLabelContainers.textContent = `Date : ${new_input_depart_date}`;
 
         // Departure flight details
         const departContainer = document.getElementById("flight-detail-each-item");
@@ -57,11 +57,11 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
 
         // Return flight label
         const return_label = document.querySelector(".return-label");
-        return_label.textContent = `Return : ${return_flight_data[0]["starting_location"]} --> ${return_flight_data[0]["destination"]}`;
+        return_label.textContent = `Return : ${new_input_to} --> ${new_input_from}`;
 
         // Return date label
         const return_labels = document.querySelector(".return-labels");
-        return_labels.textContent = `Return : ${return_flight_data[0]["departure_date"]}`;
+        return_labels.textContent = `Return : ${new_input_return_date}`;
 
         // Return flight details
         const returnContainer = document.getElementById("flight-return-detail-each-item");

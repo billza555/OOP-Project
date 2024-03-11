@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     box-sizing: border-box;
@@ -18,7 +17,7 @@
     border-radius: 15px;
 }
 
-.depart-container {
+.one-way-depart-container {
     height: auto;
     background-color: #ffcb0b;
     padding-top: 20px;
@@ -26,14 +25,14 @@
     border-radius: 15px;
 }
 
-.depart-label, .depart-labels {
+.one-way-depart-label, .one-way-depart-labels {
     padding-left: 10px;
     font-size: 1.85rem;
     padding: 15px;
 }
 
-.origin-destination, .destination-origin {
-    background-color: greenyellow;
+.one-way-origin-destination {
+    /* background-color: greenyellow; */
     margin-top: 10px;
     padding: 15px;
     display: grid;
@@ -41,15 +40,14 @@
 
 }
 
-.flight-label {
+/* .one-way-flight-label {
     font-size: 1.4rem;
     font-weight:500;
-}
+} */
 
-.flight-detail {
-    background-color: #fff;
+.one-way-flight-detail {
+    background-color: #000;
     display: flex;
-    margin-top: 20px;
     font-size: 1.4rem;
     font-weight: 500;
     padding: 10px;
@@ -57,26 +55,17 @@
     justify-content:space-around;
 }
 
-.depart-time-label, .arrive-time-label, .flight-number-label, .aircraft_number-label, .cost-label{
+.one-way-depart-time-label, .one-way-arrive-time-label, .one-way-flight-number-label, .one-way-aircraft_number-label, .one-way-cost-label{
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
 }
 
-.flight-detail-item {
+.one-way-flight-detail-item {
     width: 175px;
     height: 40px;
     padding: 5px;
-    /* margin-left: 35px; */
-}
-
-.return-container {
-    height: auto;
-    background-color: #ffcb0b;
-    padding-top: 20px;
-    padding: 10px;
-    margin-top: 50px;
-    border-radius: 15px;
 }
 
 .next-btn {
@@ -89,16 +78,16 @@
 }
 
 .next-btns {
-    width: 100px;
-    height: 40px;
+    width: 200px;
+    height: 50px;
 }
 
-.flight-detail-each-item {
-    background-color: cadetblue;
+.one-way-flight-detail-each-item {
+    /* background-color: cadetblue; */
     padding: 20px;
 }
 
-.flight-detail-each-item div {
+.one-way-flight-detail-each-item div {
     /* background-color:orangered;*/
     background-color: #fff;
     display: flex;
@@ -110,12 +99,15 @@
     justify-content:space-around;
 }
 
-.flight-detail-items {
+.one-way-flight-detail-each-item .btn {
+    /* background-color: black; */
+    /* background-color: greenyellow; */
     padding: 10px;
+    margin-right: -30px;
+    /* border: none; */
+    border-radius: 15px;
 }
 
-.flight-detail-each-item .btn {
-    /* background-color: black; */
-    padding: 10px;
-    margin-right: -20px;
+.flight-detail-items-i {
+    color: #000;
 }

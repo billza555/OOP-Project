@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* body {
+    background-color: black;
+} */
+
+.navbar {
+    background-color: #ffcb0b;
+    padding-left: 120px;
+    height: 80px;
+}
+
+.collapse {
+    padding-left: 70px;
+}
+
+.navbar-nav {
+    padding-left: 80px;
+}
+
+.nav-item {
+    padding-left: 120px;
+}

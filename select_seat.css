@@ -34,7 +34,6 @@
     margin-left: 50px;
     margin-right: 50px;
     align-items: center;
-
 }
 
 .seats, .return-seats {
@@ -90,10 +89,10 @@
     display: flex;
     background-color:rgb(116, 0, 116);
     justify-content: space-between;
-    width: 600px;
+    width: 800px;
     align-items: center;
     padding: 20px;
-    margin-left: 250px;
+    margin-left: 160px;
     margin-top: 40px;
     border-radius: 25px;
 }
@@ -112,6 +111,12 @@
 
 .normal-label {
     background-color:greenyellow;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.no-select-label {
+    background-color: magenta;
     padding: 20px;
     border-radius: 25px;
 }

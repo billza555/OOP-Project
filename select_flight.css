@@ -40,11 +40,11 @@
     grid-template-columns: auto;
 
 }
-
+/* 
 .flight-label {
     font-size: 1.4rem;
     font-weight:500;
-}
+} */
 
 .flight-detail {
     background-color: #000;
