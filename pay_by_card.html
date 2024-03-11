@@ -35,27 +35,27 @@
                         <div class="container">
                               <div>
                                     <label>Card number</label>
-                                    <input type="text" class="form-control"/>
+                                    <input type="text" class="form-control" id="card_number"/>
                               </div>
                               <div>
                                     <label>Cardholder name</label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text" class="form-control" id="name"/>
                               </div>
                               <div>
                                     <label>Expiry date</label>
-                                    <input type="date" class="form-select input-select" />
+                                    <input type="date" class="form-select input-select" id="expiry_date"/>
                               </div>
                               <div>
                                     <label>Cvv</label>
-                                    <input type="text" class="form-control"/>
+                                    <input type="text" class="form-control" id="cvv"/>
                               </div>
                               <div>
-                                    <button class="btn btn-outline-primary">pay by card</button>
+                                    <button class="btn btn-outline-primary" onclick="prepare_data()">pay by card</button>
                               </div>
                         </div>
                   </div>
             </div>
       </div>
-      <!-- <script src="pay_by_card.js"></script> -->
+      <script src="pay_by_card.js"></script>
 </body>
 </html>
