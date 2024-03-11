@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function get_pay_page(select_flight, passenger_list, select_seats) {
       try {
+        console.log("Select Flight : ", select_flight)
+        console.log("Passenger list : ", passenger_list)
+        console.log("Select Seats : ", select_seats)
             const response = await fetch(`${api}/show_unpaid_reservation_cost`, {
                 method: 'POST',
                 headers: {
@@ -48,8 +51,8 @@ async function get_pay_page(select_flight, passenger_list, select_seats) {
                     <div>
                         <label>flight cost : ${localStorage.getItem('flight_instances_cost')}</label><br>
                         <label>seats cost : ${localStorage.getItem('flight_seats_cost')}</label><br>
-                        <label>date : ${localStorage.getItem('services_cost')}</label><br>
-                        <label>services cost : ${localStorage.getItem('total_cost')}</label><br>
+                        <label>service cost : ${localStorage.getItem('services_cost')}</label><br>
+                        <label>total cost : ${localStorage.getItem('total_cost')}</label><br>
       
                     </div>
                 `;

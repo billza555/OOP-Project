@@ -3,6 +3,7 @@ const api = "http://127.0.0.1:8000";
 let all_airports = [];
 
 document.addEventListener('DOMContentLoaded', function () {
+      localStorage.clear();
       get_all_airport();
       document.getElementById('from_select').addEventListener('change', insert_airport_drop_down);
       document.getElementById('to_select').addEventListener('change', insert_airport_drop_down);

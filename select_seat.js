@@ -457,10 +457,18 @@ function to_select_service() {
     let departSeat = JSON.parse(localStorage.getItem('seat_depart'));
     let returntSeat = JSON.parse(localStorage.getItem('seat_return'));
 
+    if(departSeat === null)
+    {
+        departSeat = []
+    }
     selected_seats.push(departSeat)
     
     if (localStorage.getItem("type") == "round_trip") {
 
+        if(returntSeat === null)
+        {
+            returntSeat = []
+        }
         selected_seats.push(returntSeat)
     }
     

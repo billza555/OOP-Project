@@ -180,11 +180,9 @@ class AirportSystem:
                 reservation.add_random_flight_seat(flight_instance)
                 
             for passenger in passenger_list:
-                boarding_pass = reservation.create_boarding_pass(passenger)
-                if boarding_pass not in reservation.boarding_passes_list:
-                    boarding_passes_list.append(boarding_pass)
-                    
-        return boarding_passes_list
+                boarding_passes_list.extend(reservation.create_boarding_pass(passenger))
+                 
+            return boarding_passes_list
     
 class Reservation:
     def __init__(self):
@@ -316,19 +314,18 @@ class Reservation:
             reservation_info["flight_instance_list"][location_text]["flight_seat_list"] = flight_seat_info
         
         reservation_info["passenger_list"] = self.__passenger_list
-        reservation_info["transaction"] = self.__transaction
         return reservation_info
     
     def create_boarding_pass(self, passenger):
-        #flight_number, flight_seat_number, booking_reference, depart_date, passenger
         passenger_index = self.__passenger_list.index(passenger)
+        boarding_pass_list = []
         for index, flight_instance in enumerate(self.__flight_instance_list):
             flight_number = flight_instance.flight_number
             flight_seat_number = self.__flight_seat_list[index][passenger_index].seat_number
-            flight_seat_category = self.__flight_seat_list[index][passenger_index].seat_category.seat_category_name
             depart_date = flight_instance.date
             boarding_pass = BoardingPass(flight_number, flight_seat_number, self.__booking_reference, depart_date, passenger)
-        return boarding_pass
+            boarding_pass_list.append(boarding_pass)
+        return boarding_pass_list
     
 class User:
     def __init__(self, title, first_name, last_name, birthday, phone_number = None, email = None, middle_name = None):
