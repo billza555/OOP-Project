@@ -89,13 +89,14 @@ let return_data = [];
 
 function selectFlight(type, index, button) {
 
-    const new_input_depart_date = JSON.parse(localStorage.getItem('depart_flight_data'));
+    const new_input_depart_date = JSON.parse(localStorage.getItem('input_depart_date'));
+    const new_input_return_date = JSON.parse(localStorage.getItem('input_return_date'));
 
     if (type === 'depart') {
 
         const flightDetails = {
             flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
-            date: new_input_depart_date[0]["departure_date"]
+            date: new_input_depart_date
         };
 
         if (depart_data.length > 0) {
@@ -109,7 +110,7 @@ function selectFlight(type, index, button) {
 
         const flightDetails = {
             flight_number: button.parentNode.querySelector('.flight-number-label').textContent,
-            date: new_input_depart_date[0]["departure_date"]
+            date: new_input_return_date
         };
 
         if (return_data.length > 0) {

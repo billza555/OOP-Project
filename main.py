@@ -82,6 +82,7 @@ class AirportSystem:
 
     def get_flight_instance(self, flight_number, date):
         for flight_instance in self.__flight_instance_list:
+            print(f"{flight_instance.flight_number} vs {flight_number} and {flight_instance.date} vs ")
             if flight_instance.flight_number == flight_number and flight_instance.date == date:
                 return flight_instance 
         print(f"No matching flight_instance found for flight_number {flight_number} and date {date}")
@@ -155,48 +156,43 @@ class AirportSystem:
     
     def create_reservation_for_paid(self, flight_instance_list, passenger_list, flight_seats_list):
         reservation = Reservation()
+        
         #0 = title, 1 = first_name, 2 = middle_name, 3 = last_name, 4 = birthday, 5 = phone_number, 6 = email, 7 = service_list
         for passenger_data in passenger_list:
-            passenger = Passenger(passenger_data["title"], passenger_data["first_name"], passenger_data["middle_name"], passenger_data["last_name"], passenger_data["birthday"], passenger_data["phone_number"], passenger_data["email"])
-            service_list = passenger_data["service_list"]
+            passenger = Passenger(passenger_data.get("title"), passenger_data.get("first_name"), passenger_data.get("last_name"), passenger_data.get("birthday"), passenger_data.get("phone_number"), passenger_data.get("email"), passenger_data.get("middle_name"))
+            service_list = passenger_data.get("service_list")
             for service_data in service_list:
                 #0 = service_name, 1 = price_per_unit
-                service = self.get_service(service_data[0])
+                service = self.get_service(service_data)
                 passenger.add_service(service)
             reservation.add_passenger(passenger)
         
         #0 = flight_number, 1 = date
         for flight_instance_data in flight_instance_list:
-            flight_instance = self.get_flight_instance(flight_instance_data["flight_number"], flight_instance_data["date"])
+            flight_instance = self.get_flight_instance(flight_instance_data.get("flight_number"), flight_instance_data.get("date"))
+            reservation.add_flight_instance(flight_instance)
         
-        # Check if flight_instance is found
-        if flight_instance is None:
-            print(f"No matching flight_instance found for flight_number {flight_instance_data['flight_number']} and date {flight_instance_data['date']}")
-            return None
-
-        reservation.add_flight_instance(flight_instance)
-
+        #flight_seat_list data structure: [[seat1, seat2], [seat3, seat4]]
+        #                                        /\              /\
+        #                                     departing       returning
+        
+        new_flight_seat_list = []
+        
         for index, flight_instance in enumerate(reservation.flight_instances_list):
-            new_flight_seat_list = []
-            print("flight_seats_list at index:", index)
+            sub_list_of_flight_seats = []
+            #check each sub_list of flight_seats
             for flight_seat_number in flight_seats_list[index]:
-                print("Flight number seat : ", flight_seat_number)
-                print("Flight Instance : ", flight_instance)
-
-                # Check if flight_seat is found
                 flight_seat = flight_instance.get_flight_seat(flight_seat_number)
-                if flight_seat is None or flight_seat.occupied:
-                    print("flight_seat not found or occupied")
+                #if flight_seat not found or is occupied; unoccupy all previous checked flight_seats and abort
+                if not flight_seat or flight_seat.occupied:
+                    for checked_sub_list in new_flight_seat_list:
+                        for checked_flight_seat in checked_sub_list:
+                            checked_flight_seat.occupied = False
                     return None
-
-                print("Flight seat : ", flight_seat)
-                print("Seat occupied : ", flight_seat.occupied)
-
                 flight_seat.occupied = True
-                new_flight_seat_list.append(flight_seat)
-
-            reservation.add_flight_seat(new_flight_seat_list)
-
+                sub_list_of_flight_seats.append(flight_seat)
+            new_flight_seat_list.append(sub_list_of_flight_seats)
+            
         return reservation
 
     def get_reservation(self, booking_reference):
@@ -398,7 +394,7 @@ class FlightInstance(Flight):
 
     def get_flight_seat(self, seat_number):
         for flight_seat in self.__flight_seat_list:
-            #print(flight_seat.seat_number, seat_number)
+            print(flight_seat.seat_number, seat_number)
             if flight_seat.seat_number == seat_number:
                 return flight_seat
     
@@ -522,6 +518,9 @@ class Service:
     @total_cost.setter
     def total_cost(self, total_cost):
         self.__total_cost = total_cost
+
+    def get_service_info_for_showing(self):
+        return {"service_name": self.__service_name, "total_cost": self.__total_cost}
 
 class Insurance(Service):
     def __init__(self, service_name, price_per_unit):

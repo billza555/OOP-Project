@@ -22,8 +22,8 @@ app.add_middleware(
 
 @app.get("/flight_instance_matches", tags=["Show + Get Flight Instance Matches"])
 def get_flight_instances_matches(starting_location : str, destination : str, depart_date : str, return_date : Optional[str] = None):
-    return nokair.get_flight_instance_matches(starting_location, destination, depart_date, return_date)
-    # return json.dumps(flight_instance_matches)
+    flight_instance_matches = nokair.get_flight_instance_matches(starting_location, destination, depart_date, return_date)
+    return flight_instance_matches
 
 @app.get("/get_all_seats", tags=["Show + Get Flight Instance Matches"])
 def get_all_seats(flight_number : str, date : str):
@@ -31,7 +31,10 @@ def get_all_seats(flight_number : str, date : str):
 
 @app.get("/get_all_services", tags=["Services"])
 def get_all_services():
-    return nokair.service_list
+    all_services_info = []
+    for service in nokair.service_list:
+        all_services_info.append(service.get_service_info_for_showing())
+    return all_services_info
 
 @app.get("/get_all_airports", tags=["Show + Get Flight Instance Matches"])
 def get_all_airports():
