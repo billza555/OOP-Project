@@ -3,39 +3,43 @@
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
+      <title>tambye - pay</title>
+      
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-      <link rel="stylesheet" href="service.css">
+      <link rel="stylesheet" href="pay_page.css">
 </head>
 <body>
 
       <nav class="navbar navbar-expand-lg nav-underline">
             <div class="container-fluid fs-4 fw-bold">
-              <a class="navbar-brand fw-bold fs-3" href="index.html">tambye</a>
+                  <a class="navbar-brand fw-bold fs-3" href="index.html">tambye</a>
             </div>
-        </nav>
+      </nav>
 
-      <h1>Pay page</h1>
-      <h1>choose way to pay</h1>
+      <div class="container">
+            <label class="payment-label">Select way to pay</label>
+            <div id="transaction" class="transaction">
+                  <!-- add cost-->
+            </div>
+            <div class="payment-method">
+                  <div class="card-box">
+                        <div class="card-body">
+                          <h5 class="card-title">Pay by QRcode</h5>
+                          <p>Payment fee : 0 Baht</p>
+                          <a href="pay_by_qr.html" class="btn btn-primary">select</a>
+                        </div>
+                  </div>
 
-
-      <div id="transaction">
-            <!-- add -->
-      </div>
-      
-      <div class="card w-50">
-            <div class="card-body">
-              <h5 class="card-title">Pay by QRcode</h5>
-              <a href="pay_by_qr.html" class="btn btn-primary">select</a>
+                  <div class="card-box">
+                        <div class="card-body">
+                          <h5 class="card-title">Pay by Credit Card</h5>
+                          <p>Payment fee : 240 Baht</p>
+                          <a href="pay_by_card.html" class="btn btn-primary">select</a>
+                        </div>
+                  </div>
             </div>
       </div>
 
-      <div class="card w-50">
-            <div class="card-body">
-              <h5 class="card-title">Pay by Credit Card</h5>
-              <a href="pay_by_card.html" class="btn btn-primary">select</a>
-            </div>
-      </div>
       <script src="pay_page.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

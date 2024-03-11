@@ -87,7 +87,7 @@
 
 .price-label {
     display: flex;
-    background-color:rgb(116, 0, 116);
+    background-color:rgb(157, 0, 157);
     justify-content: space-between;
     width: 800px;
     align-items: center;
@@ -98,19 +98,19 @@
 }
 
 .premium-label {
-    background-color:red;
+    background-color:rgb(255, 0, 0);
     padding: 20px;
     border-radius: 25px;
 }
 
 .happy-label {
-    background-color:rgb(255, 118, 69);
+    background-color:rgb(64, 255, 0);
     padding: 20px;
     border-radius: 25px;
 }
 
 .normal-label {
-    background-color:greenyellow;
+    background-color:rgb(18, 196, 255);
     padding: 20px;
     border-radius: 25px;
 }

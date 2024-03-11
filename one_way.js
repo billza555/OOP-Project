@@ -1,41 +1,3 @@
-// const api = "http://127.0.0.1:8000";
-
-// document.addEventListener('DOMContentLoaded', function () {
-//       get_all_airport();
-// });
-
-// async function get_all_airport() {
-//       try {
-//             const response = await fetch(`${api}/get_all_airports`);
-            
-//             if (!response.ok) {
-//                   throw new Error(`HTTP error! Status: ${response.status}`);
-//             }
-      
-//             const response_data = await response.json();
-//             console.log(response_data);
-            
-//             const container_from = document.getElementById('from_select');
-            
-//             response_data.forEach(data => {
-//                   const element = document.createElement("option");
-//                   element.value = data._Airport__name;
-//                   element.innerHTML = `${data._Airport__name} [${data._Airport__short_name}]`;
-//                   container_from.appendChild(element);
-//             });
-
-//             const container_to = document.getElementById('to_select');
-//             response_data.forEach(data => {
-//                   const element = document.createElement("option");
-//                   element.value = data._Airport__name;
-//                   element.innerHTML = `${data._Airport__name} [${data._Airport__short_name}]`;
-//                   container_to.appendChild(element);
-//             });
-
-//             } catch (error) {
-//             console.error('Error:', error);
-//       }
-// }
 
 const api = "http://127.0.0.1:8000";
 
@@ -58,7 +20,8 @@ async function get_all_airport() {
             all_airports = await response.json();
             console.log(all_airports);
             insert_airport_drop_down();
-            } catch (error) {
+
+      } catch (error) {
             console.error('Error:', error);
       }
 }
@@ -71,14 +34,14 @@ function insert_airport_drop_down(){
       const new_container_to = document.createElement("select");
       
       all_airports.forEach(data => {
-            if (data._Airport__name != container_to.value){
+
+            if (data._Airport__name != container_to.value) {
                   const element = document.createElement("option");
                   element.value = data._Airport__name;
                   element.innerHTML = `${data._Airport__name} [${data._Airport__short_name}]`;
                   new_container_from.appendChild(element);
             }
       });
-
 
       all_airports.forEach(data => {
             if (data._Airport__name != container_from.value){
@@ -89,19 +52,15 @@ function insert_airport_drop_down(){
             }
       });
 
-      // Store the selected values
       const selectedFrom = container_from.value;
       const selectedTo = container_to.value;
 
-      // Update the innerHTML
       container_from.innerHTML = new_container_from.innerHTML;
       container_to.innerHTML = new_container_to.innerHTML;
 
-      // Restore the selected values
       container_from.value = selectedFrom;
       container_to.value = selectedTo;
 }
-
 
 function search_flights() {
       

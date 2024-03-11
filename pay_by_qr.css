@@ -8,3 +8,42 @@
     padding-left: 120px;
     height: 80px;
 }
+
+.container {
+    background-color: aqua;
+    width: 600px;
+    height: 450px;
+    margin-top: 80px;
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.qr-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.qr-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.submit-btn {
+    width: 150px;
+    border-radius: 25px;
+    height: 50px;
+}

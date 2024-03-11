@@ -3,24 +3,72 @@
     box-sizing: border-box;
 }
 
-/* body {
-    background-color: black;
-} */
-
 .navbar {
     background-color: #ffcb0b;
     padding-left: 120px;
     height: 80px;
 }
 
-.collapse {
-    padding-left: 70px;
+.container {
+    background-color: #ffcb0b;
+    width: 800px;
+    height: 550px;
+    margin-top: 50px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
 }
 
-.navbar-nav {
-    padding-left: 80px;
+.payment-label {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 1.95rem;
+    font-weight: 700;
+    margin-top: 30px;
+    padding: 10px;
 }
 
-.nav-item {
-    padding-left: 120px;
+.transaction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.transaction div {
+    background-color: aquamarine;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.payment-method {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.card-box {
+    background-color: #fff;
+    width: 350px;
+    height: 140px;
+    border-radius: 25px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
 }

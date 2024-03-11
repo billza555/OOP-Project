@@ -2,7 +2,6 @@ const api = "http://127.0.0.1:8000";
 
 document.addEventListener('DOMContentLoaded', function () {
     const len_passenger = JSON.parse(localStorage.getItem('passenger_num'));
-
     to_passengers_fill(len_passenger);
 });
 
@@ -57,7 +56,7 @@ async function to_passengers_fill(len_passenger) {
         }
 
     } catch (error) {
-          console.error('Error:', error);
+        console.error('Error:', error);
     }
 }
 
@@ -97,6 +96,7 @@ function to_select_seat() {
         }
 
     } else {
+        
         const first_passenger_info = {
             title: document.getElementById(`title-input`).value,
             first_name: document.getElementById(`passenger-first-name`).value,

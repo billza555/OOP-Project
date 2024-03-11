@@ -45,17 +45,16 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
             `;
             booking_ref.appendChild(book_element);
 
-
             const depart = document.getElementById("depart");
             const depat_element = document.createElement("div");
                 depat_element.innerHTML = `
                     <div class="text-center">
-                        <label>from : ${reservation["flight_instance_list"]["departing_flight"]["from"]}</label><br>
-                        <label>to : ${reservation["flight_instance_list"]["departing_flight"]["to"]}</label><br>
-                        <label>date : ${reservation["flight_instance_list"]["departing_flight"]["date"]}</label><br>
-                        <label>flight_number : ${reservation["flight_instance_list"]["departing_flight"]["flight_number"]}</label><br>
-                        <label>time : ${reservation["flight_instance_list"]["departing_flight"]["departure_time"]} - ${reservation["flight_instance_list"]["departing_flight"]["arrival_time"]}</label><br>
-                        <label>aircraft : ${reservation["flight_instance_list"]["departing_flight"]["aircraft_number"]}</label><br>
+                        <label>From : ${reservation["flight_instance_list"]["departing_flight"]["from"]}</label><br>
+                        <label>To : ${reservation["flight_instance_list"]["departing_flight"]["to"]}</label><br>
+                        <label>Date : ${reservation["flight_instance_list"]["departing_flight"]["date"]}</label><br>
+                        <label>Flight number : ${reservation["flight_instance_list"]["departing_flight"]["flight_number"]}</label><br>
+                        <label>Time : ${reservation["flight_instance_list"]["departing_flight"]["departure_time"]} - ${reservation["flight_instance_list"]["departing_flight"]["arrival_time"]}</label><br>
+                        <label>Aircraft : ${reservation["flight_instance_list"]["departing_flight"]["aircraft_number"]}</label><br>
                     </div>
                 `;
             depart.appendChild(depat_element);
@@ -65,12 +64,12 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
                 const return_element = document.createElement("div");
                     return_element.innerHTML = `
                         <div class="text-center">
-                            <label>from : ${reservation["flight_instance_list"]["returning_flight"]["from"]}</label><br>
-                            <label>to : ${reservation["flight_instance_list"]["returning_flight"]["to"]}</label><br>
-                            <label>date : ${reservation["flight_instance_list"]["returning_flight"]["date"]}</label><br>
-                            <label>flight_number : ${reservation["flight_instance_list"]["returning_flight"]["flight_number"]}</label><br>
-                            <label>time : ${reservation["flight_instance_list"]["returning_flight"]["departure_time"]} - ${reservation["flight_instance_list"]["returning_flight"]["arrival_time"]}</label><br>
-                            <label>aircraft : ${reservation["flight_instance_list"]["returning_flight"]["aircraft_number"]}</label><br>
+                            <label>From : ${reservation["flight_instance_list"]["returning_flight"]["from"]}</label><br>
+                            <label>To : ${reservation["flight_instance_list"]["returning_flight"]["to"]}</label><br>
+                            <label>Date : ${reservation["flight_instance_list"]["returning_flight"]["date"]}</label><br>
+                            <label>Flight_number : ${reservation["flight_instance_list"]["returning_flight"]["flight_number"]}</label><br>
+                            <label>Time : ${reservation["flight_instance_list"]["returning_flight"]["departure_time"]} - ${reservation["flight_instance_list"]["returning_flight"]["arrival_time"]}</label><br>
+                            <label>Aircraft : ${reservation["flight_instance_list"]["returning_flight"]["aircraft_number"]}</label><br>
                         </div>
                         `;
                 return_flight.appendChild(return_element);
@@ -86,7 +85,7 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
                     passenger_element.innerHTML = `
             
                         <div>
-                            <p>>${data["_User__title"]}${data["_User__first_name"]} ${data["_User__middle_name"]} ${data["_User__last_name"]}</p>
+                            <p>${data["_User__title"]}${data["_User__first_name"]} ${data["_User__middle_name"]} ${data["_User__last_name"]}</p>
                         </div> 
                 
                     `;

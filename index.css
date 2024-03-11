@@ -49,11 +49,7 @@
     justify-content: space-between;
 }
 
-.select-from {
-    width: 200px;
-}
-
-.select-to {
+.select-from, .select-to {
     width: 200px;
 }
 
@@ -63,6 +59,7 @@
 
 .desc-label {
     margin-left: 10px;
+
 }
 
 .submit {
@@ -73,17 +70,35 @@
 }
 
 .submit-btn {
-    width: 200px;
+    width: 145px;
     height: 50px;
+    background-color: #18b200;
+    border-radius: 25px;
+    color: #fff;
+}
+
+.submit-btn:hover {
+    background-color: #18b200;
+    color: #fff;
 }
 
 .one-way-btn {
-    background-color: #800080;
-    color: #ffffff;
+    background-color: #fff;
+    color: #000;
 }
 
 .round-trip-btn {
-    background-color: #d63384;
+    background-color: #4a0dcf;
+    color: #fff;
+}
+
+.one-way-btn:hover {
+    background-color: #8f068f;
+    color: #ffffff;
+}
+
+.round-trip-btn:hover {
+    background-color: #4a0dcf;
     color: #ffffff;
 
 }

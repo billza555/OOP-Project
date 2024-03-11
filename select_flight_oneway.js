@@ -60,7 +60,6 @@ let return_data = [];
 function selectFlight(type, index, button) {
 
     const new_input_depart_date = JSON.parse(localStorage.getItem('input_depart_date'));
-    const new_input_return_date = JSON.parse(localStorage.getItem('input_return_date'));
 
     if (type === 'depart') {
 

@@ -10,7 +10,7 @@
 }
 
 .container {
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
     margin-top: 40px;
     padding: 10px;
     border-radius: 25px;
@@ -23,8 +23,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* background-color: blue; */
-    /* width: 1100; */
 
 }
 
@@ -46,20 +44,12 @@
     margin-left: 20px;
 }
 
-/* .response {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    /* background-color: burlywood; 
-} */
-
 .response {
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    /* justify-content: space-around; */
-    align-items: flex-start; /* Align items to the top of the container */
-    margin-top: 20px; /* Adjust as needed */
+    flex-wrap: wrap;
+    align-items: flex-start; 
+    margin-top: 20px;
+    justify-content: center;
 }
 
 .card-detail {
@@ -71,7 +61,6 @@
 }
 
 .card-body {
-    /* background-color: #ffcb0b; */
     padding: 20px;
     display: flex;
     align-items: center;
@@ -79,19 +68,29 @@
 }
 
 .card-text {
-    /* background-color: aqua; */
     font-size: 1.65rem;
     font-weight: 700;
     padding: auto;
 }
 
 .checked-box {
-    /* background-color: darkmagenta; */
-    /* padding: 5px; */
-    /* width: calc(43.33% - 20px); 33.33% width for each card with 20px margin in between */
     margin-top: 10px;
 }
 
 .form-check-label {
     margin-left: 5px;
+}
+
+.next-btn {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    margin-top: 50px;
+    padding-right: 180px;
+    margin-bottom: 50px;
+}
+
+.next-btns {
+    width: 200px;
+    height: 50px;
 }

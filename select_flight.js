@@ -16,6 +16,7 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const response_data = await response.json();
         console.log("Response data : ", response_data)
 
@@ -28,8 +29,6 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
         localStorage.setItem('depart_flight_data', JSON.stringify(depart_flight_data));
         localStorage.setItem('return_flight_data', JSON.stringify(return_flight_data));
 
-        // console.log("depart_flight_data", depart_flight_data)
-
         // Departure flight label
         const departLabelContainer = document.querySelector(".depart-label");
         departLabelContainer.textContent = `Departure : ${new_input_from} --> ${new_input_to}`;
@@ -40,7 +39,8 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
 
         // Departure flight details
         const departContainer = document.getElementById("flight-detail-each-item");
-        departContainer.innerHTML = ''; // Clear previous content
+        departContainer.innerHTML = '';
+
         depart_flight_data.forEach((data, index) => {
             const element = document.createElement("div");
             element.innerHTML = `
@@ -65,7 +65,8 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
 
         // Return flight details
         const returnContainer = document.getElementById("flight-return-detail-each-item");
-        returnContainer.innerHTML = ''; // Clear previous content
+        returnContainer.innerHTML = '';
+        
         return_flight_data.forEach((data, index)=> {
             const element = document.createElement("div");
             element.innerHTML = `
@@ -127,7 +128,6 @@ function selectFlight(type, index, button) {
     console.log("Selected : ", select_data);
 
     localStorage.setItem('select_flight', JSON.stringify(select_data));
-
 }
 
 function to_passengers_fill() {

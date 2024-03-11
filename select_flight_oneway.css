@@ -10,7 +10,6 @@
 }
 
 .container {
-    /* background-color: aqua; */
     width: 100%;
     margin-top: 50px;
     padding: 30px;
@@ -29,10 +28,10 @@
     padding-left: 10px;
     font-size: 1.85rem;
     padding: 15px;
+    margin-left: 20px;
 }
 
 .one-way-origin-destination {
-    /* background-color: greenyellow; */
     margin-top: 10px;
     padding: 15px;
     display: grid;
@@ -40,19 +39,15 @@
 
 }
 
-/* .one-way-flight-label {
-    font-size: 1.4rem;
-    font-weight:500;
-} */
-
 .one-way-flight-detail {
     background-color: #000;
     display: flex;
     font-size: 1.4rem;
     font-weight: 500;
-    padding: 10px;
+    padding: 25px;
+    padding-left: 45px;
     border-radius: 25px;
-    justify-content:space-around;
+    justify-content: space-around;
 }
 
 .one-way-depart-time-label, .one-way-arrive-time-label, .one-way-flight-number-label, .one-way-aircraft_number-label, .one-way-cost-label{
@@ -61,6 +56,10 @@
     align-items: center;
     color: #fff;
 }
+
+.choose-flight-btn {
+    width: 120px;
+} 
 
 .one-way-flight-detail-item {
     width: 175px;
@@ -83,29 +82,25 @@
 }
 
 .one-way-flight-detail-each-item {
-    /* background-color: cadetblue; */
     padding: 20px;
 }
 
 .one-way-flight-detail-each-item div {
-    /* background-color:orangered;*/
     background-color: #fff;
     display: flex;
     margin-top: 20px;
     font-size: 1.4rem;
     font-weight: 500;
-    padding: 10px;
+    padding: 15px;
     border-radius: 25px;
     justify-content:space-around;
 }
 
 .one-way-flight-detail-each-item .btn {
-    /* background-color: black; */
-    /* background-color: greenyellow; */
     padding: 10px;
-    margin-right: -30px;
-    /* border: none; */
+    margin-right: -50px;
     border-radius: 15px;
+    width: 100px;
 }
 
 .flight-detail-items-i {

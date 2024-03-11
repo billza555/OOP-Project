@@ -10,7 +10,7 @@ async function get_all_service() {
       const response = await fetch(`${api}/get_all_services`);
       
       if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       const response_data = await response.json();

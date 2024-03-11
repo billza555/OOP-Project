@@ -4,7 +4,7 @@
 }
 
 .navbar {
-    background-color: #ffcb0b;
+    background-color: #ffcc00;
     padding-left: 120px;
     height: 80px;
 }
@@ -23,7 +23,7 @@
 
 .container-one-way {
     margin: 130px;
-    background-color: rgb(216, 163, 210);
+    background-color: #25ffff;
     height: 350px;
     border-radius: 35px;
 }
@@ -41,6 +41,32 @@
     border-radius: 15px;
     height: 50px;
     margin-left: 20px;
+    background-color: aqua;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    color: #000;
+}
+
+.trip-btn:hover {
+    background-color: #4a0dcf;
+    color: #ffffff;
+}
+
+.one-btn {
+    width: 130px;
+    border-radius: 15px;
+    height: 50px;
+    margin-left: 20px;
+    background-color: #8f068f;
+    color: #ffffff;
+    outline: none;
+    border: none;
+}
+
+.one-btn:hover {
+    background-color: #8f068f;
+    color: #ffffff;
 }
 
 .flight-input {
@@ -65,14 +91,20 @@
     margin-left: 10px;
 }
 
-.submit {
-    display: flex;
-    justify-content: right;
-    margin-right: 70px;
-    margin-top: 50px;
+.submit-btn {
+    width: 145px;
+    height: 50px;
+    background-color: #18b200;
+    border-radius: 25px;
+    color: #fff;
 }
 
-.submit-btn {
-    width: 130px;
-    height: 40px;
+.submit-btn:hover {
+    background-color: #18b200;
+    color: #fff;
+}
+
+.submit {
+    margin-top: 50px;
+    margin-left: 1030px;
 }
