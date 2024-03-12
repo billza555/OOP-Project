@@ -93,7 +93,7 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
                     passenger_element.innerHTML = `
             
                         <div>
-                            <p>>${data["_User__title"]}${data["_User__first_name"]} ${data["_User__last_name"]}</p>
+                            <p>${data["_User__title"]}${data["_User__first_name"]} ${data["_User__last_name"]}</p>
                         </div> 
                 
                     `;
@@ -101,6 +101,17 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
                 }
                 passenger.appendChild(passenger_element);
             });
+
+            const transaction_data = document.getElementById("transaction");
+            const transaction_element = document.createElement("div");
+                transaction_element.innerHTML = `
+                    <div class="text-center">
+                        <label>pay by : ${reservation["transaction"]["_Transaction__payment_method"]}</label><br>
+                        <label>time : ${reservation["transaction"]["_Transaction__paid_time"]}</label>
+                    </div>
+                `;
+            transaction_data.appendChild(transaction_element);
+
         
 
         } catch (error) {

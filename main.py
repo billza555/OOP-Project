@@ -296,6 +296,8 @@ class Reservation:
         reservation_info = {}
         reservation_info["booking_reference"] = self.__booking_reference
         reservation_info["flight_instance_list"] = {}
+
+        reservation_info["transaction"] = self.__transaction
         
         for index, flight_instance in enumerate(self.__flight_instance_list):
             flight_instance_info = flight_instance.get_flight_instance_info_for_showing()
@@ -546,9 +548,9 @@ class Qr(PaymentMethod):
     pass
 
 class Transaction:
-    def __init__(self, payment_method: PaymentMethod):
+    def __init__(self, payment_method:PaymentMethod):
         self.__paid_time = datetime.now()
-        self.__payment_method = payment_method
+        self.__payment_method = payment_method.__class__.__name__
 
 class Service:
     def __init__(self, service_name, price_per_unit):
