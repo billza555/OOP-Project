@@ -21,14 +21,22 @@ function prepare_data() {
     const expiry_date = document.getElementById("expiry_date").value;
     const cvv = document.getElementById("cvv").value;
 
-    localStorage.setItem("card_number", JSON.stringify(card_number));
-    localStorage.setItem("name", JSON.stringify(name));
-    localStorage.setItem("expiry_date", JSON.stringify(expiry_date));
-    localStorage.setItem("cvv", JSON.stringify(cvv));
+    let missing_info_card = false; 
+    if (card_number=="" || name=="" || expiry_date=="" || cvv=="") {
+        missing_info_card = true;
+    }
 
+    if (missing_info_card) {
 
-    localStorage.setItem('passengers_data', JSON.stringify(all_respon));
+        alert("please fill the information");
 
-    document.location.href = "reservation_card.html";
+    } else {
+        localStorage.setItem("card_number", JSON.stringify(card_number));
+        localStorage.setItem("name", JSON.stringify(name));
+        localStorage.setItem("expiry_date", JSON.stringify(expiry_date));
+        localStorage.setItem("cvv", JSON.stringify(cvv));
+        localStorage.setItem('passengers_data', JSON.stringify(all_respon));
+        document.location.href = "reservation_card.html";
+    }
 
 }

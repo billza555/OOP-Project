@@ -3,9 +3,10 @@
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
+      <title>tambye - pay by card</title>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
       <link rel="stylesheet" href="pay_by_card.css">
+
 </head>
 <body>
       <nav class="navbar navbar-expand-lg nav-underline">
@@ -19,25 +20,25 @@
                         <div class="head  text-center">
                               <label class="depart-label fw-bold">Pay by card</label>
                         </div>
-                        <div class="container">
-                              <div>
-                                    <label>Card number</label>
-                                    <input type="text" class="form-control" id="card_number"/>
+                        <div class="body">
+                              <div class="input-box">
+                                    <label class="card-number-label">Card number</label>
+                                    <input type="text" class="form-control" id="card_number" placeholder="Enter card number"/>
                               </div>
-                              <div>
-                                    <label>Cardholder name</label>
-                                    <input type="text" class="form-control" id="name"/>
+                              <div class="input-box">
+                                    <label class="cardholder-name-label">Cardholder name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Enter cardholde name"/>
                               </div>
-                              <div>
-                                    <label>Expiry date</label>
+                              <div class="input-box">
+                                    <label class="expiry-date-label">Expiry date</label>
                                     <input type="date" class="form-select input-select" id="expiry_date"/>
                               </div>
-                              <div>
-                                    <label>Cvv</label>
-                                    <input type="text" class="form-control" id="cvv"/>
+                              <div class="input-box">
+                                    <label class="cvv-label">Cvv</label>
+                                    <input type="text" class="form-control" id="cvv" placeholder="Enter cvv"/>
                               </div>
-                              <div>
-                                    <button class="btn btn-outline-primary" onclick="prepare_data()">pay by card</button>
+                              <div class="submit">
+                                    <button class="btn btn-success submit-btn" onclick="prepare_data()">Pay by credit card</button>
                               </div>
                         </div>
                   </div>
@@ -45,5 +46,6 @@
       </div>
       
       <script src="pay_by_card.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

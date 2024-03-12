@@ -66,28 +66,22 @@ function search_flights() {
       
       let fromSelect = document.getElementById("from_select");
       let toSelect = document.getElementById("to_select");
-      let input_from = fromSelect.options[fromSelect.selectedIndex].value;
-      let input_to = toSelect.options[toSelect.selectedIndex].value;
+      let input_from = fromSelect.value;
+      let input_to = toSelect.value;
       let input_depart_date = document.getElementById("departure_date").value;
       let passenger_num = document.getElementById("passenger_num").value;
 
-      localStorage.setItem('input_from', JSON.stringify(input_from));
-      localStorage.setItem('input_to', JSON.stringify(input_to));
-      localStorage.setItem('input_depart_date', JSON.stringify(input_depart_date));
-      localStorage.setItem('passenger_num', JSON.stringify(passenger_num));
-      localStorage.setItem('type', 'one_way');
-
-      if (fromSelect && toSelect && input_from && input_to && input_depart_date && passenger_num) {
+      if (!input_from || !input_to || !input_depart_date || !passenger_num) {
+            
+            alert("Please enter complete information.");
+      
+      } else {    
             localStorage.setItem('input_from', JSON.stringify(input_from));
             localStorage.setItem('input_to', JSON.stringify(input_to));
             localStorage.setItem('input_depart_date', JSON.stringify(input_depart_date));
             localStorage.setItem('passenger_num', JSON.stringify(passenger_num));
             localStorage.setItem('type', 'one_way');
 
-            document.location.href = "select_flight_oneway.html";
-
-      } else {
-            
-            alert("Please enter complete informations.");
+            document.location.href = "select_flight.html";
       }
 }

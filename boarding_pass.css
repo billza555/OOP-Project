@@ -27,12 +27,10 @@
   padding: 20px;
   border-radius: 25px;
   font-weight: 700;
-
 }
 
 .boarding_pass {
   margin-top: 20px;
-  /* background-color: brown; */
   padding: 20px;
   border-radius: 22px;
   display: flex;

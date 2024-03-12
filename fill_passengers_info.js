@@ -113,6 +113,22 @@ function to_select_seat() {
     console.log(passenger_data)
     localStorage.setItem('passenger_data', JSON.stringify(passenger_data));
 
-    document.location.href = "select_seat.html";
+    let missing_info = false; 
+    passenger_data.forEach((data, index) => {
+        if (index === 0) {
+            if(data.title === "" || data.first_name === "" || data.last_name === "" || data.birthday === "" || data.phone_number === "" || data.email === "") {
+                missing_info = true;
+            }
+        } else {
+            if (data.title === "" || data.first_name == "" || data.last_name === "" || data.birthday === "") {
+                missing_info = true;
+            }
+        }
+    });
 
+    if (missing_info) {
+        alert("Please fill complete passenger informations");
+    } else {
+        document.location.href = "select_seat.html";
+    }
 }

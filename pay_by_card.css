@@ -9,21 +9,55 @@
     height: 80px;
 }
 
+.container {
+    background-color: #ffcb0b;
+    border-radius: 25px;
+    margin-top: 50px;
+    line-height: 50px
+}
+
 .box {
     padding: 20px;
     margin: 20px;
 }
 
-.head
-{
-    background-color: red;
+.head {
+    background-color: rgb(255, 0, 0);
+    border-radius: 25px;
     height: 100px;
     text-align: center;
     line-height: 100px;
-    font-size: large;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-top: 20px;
 }
 
-.container
-{
-    line-height: 50px
+.input-box {
+    height: 90px;
+    margin-top: 20px;
+}
+
+.card-number-label, .cardholder-name-label, .expiry-date-label, .cvv-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.submit {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 40px;
+    padding: 10px;
+    margin-right: 60px;
+}
+
+.submit-btn {
+    width: 200px;
+    border-radius: 25px;
+    height: 60px;
+}
+
+.form-control, .form-select {
+    height: 45px;
 }

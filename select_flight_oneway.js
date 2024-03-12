@@ -88,8 +88,11 @@ function to_passengers_fill() {
 
     const select_flight_data = JSON.parse(localStorage.getItem('select_flight'));
     console.log("Select Flight : ", select_flight_data)
-    localStorage.setItem('select_flight', JSON.stringify(select_flight_data));
 
-    document.location.href = "fill_passengers_info.html";
+    if (select_flight_data == null) {
+        alert("please choose flight");
+    } else {
+        document.location.href = "fill_passengers_info.html";
+    }
 
 }
