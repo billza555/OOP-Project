@@ -117,6 +117,9 @@ async function get_reservation(card_number, name_holder, expiry_date, cvv, selec
                 `;
             transaction_data.appendChild(transaction_element);
 
+            if (localStorage.getItem('type') === 'one_way') {
+                document.getElementById('return').style.display = 'none';
+            }
         
 
         } catch (error) {

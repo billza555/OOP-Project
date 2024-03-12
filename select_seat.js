@@ -200,7 +200,7 @@ async function show_all_seats(flight_number_list, date_list) {
         const return_normal_container_1 = document.getElementById("return-normal-seats-row-1");
         return_normal_container_1.innerHTML = ''; // Clear previous content
         
-        depart_seats_list.forEach((data, index) => {
+        return_seats_list.forEach((data, index) => {
             if (
                 data._Seats__seat_category._SeatCategory__seat_category_name === "normal_seat" &&
                 (data._Seats__seat_number === "A3" ||
@@ -228,7 +228,7 @@ async function show_all_seats(flight_number_list, date_list) {
         const return_normal_container_2 = document.getElementById("return-normal-seats-row-2");
         return_normal_container_2.innerHTML = '';
         
-        depart_seats_list.forEach((data, index) => {
+        return_seats_list.forEach((data, index) => {
             if (
                 data._Seats__seat_category._SeatCategory__seat_category_name === "normal_seat" &&
                 (data._Seats__seat_number === "A4" ||
@@ -256,7 +256,7 @@ async function show_all_seats(flight_number_list, date_list) {
         const return_normal_container_3 = document.getElementById("return-normal-seats-row-3");
         return_normal_container_3.innerHTML = '';
 
-        depart_seats_list.forEach((data, index) => {
+        return_seats_list.forEach((data, index) => {
             if (
                 data._Seats__seat_category._SeatCategory__seat_category_name === "normal_seat" &&
                 (data._Seats__seat_number === "A5" ||
@@ -284,7 +284,7 @@ async function show_all_seats(flight_number_list, date_list) {
         const return_happy_container = document.getElementById("return-happy-seats");
         return_happy_container.innerHTML = ''; 
         
-        depart_seats_list.forEach((data, index) => {
+        return_seats_list.forEach((data, index) => {
             if (data._Seats__seat_category._SeatCategory__seat_category_name === "happy_seat") {
                 const element = document.createElement("div");
                 if (data._FlightSeat__occupied) {

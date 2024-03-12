@@ -112,7 +112,9 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
                 `;
             transaction_data.appendChild(transaction_element);
 
-        
+            if (localStorage.getItem('type') === 'one_way') {
+                document.getElementById('return').style.display = 'none';
+            }
 
         } catch (error) {
             console.error('Error:', error);
