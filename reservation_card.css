@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #ffcb0b;
+    padding-left: 120px;
+    height: 80px;
+}
+
+.container {
+    width: 800px;
+    height: auto;
+    margin-top: 70px;
+}
+
+.reservation-container{
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation {
+    background-color: yellow;
+    border-radius: 25px;
+    padding: 30px;
+    width: 600px;
+    height: auto;
+}
+
+.Success {
+    font-size: 1.9rem;
+}
+
+.depart-label {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.booking_reference {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-top: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#flight {
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.depart {
+    background-color: rgb(163, 252, 255);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: auto;
+    margin-bottom: 30px;
+    font-size: 1.25rem;
+}
+
+.return {
+    background-color: rgb(255, 172, 109);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: auto;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    padding: 20px;
+}
+
+.passenger {
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+    margin-top: 20px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.passenger-label, .transaction-title {
+    background-color: aquamarine;
+    margin-top: 10px;
+    padding: 20px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+#passenger {
+    border-radius: 25px;
+    padding: 20px;
+    font-size: 1.25rem;
+    font-weight: 700
+}
+
+.transaction {
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+    margin-top: 20px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#transaction {
+    font-size: 1.25rem;
+    font-weight: 700
+}
+
+.label-title {
+    background-color: aquamarine;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.next-btn {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    margin-right: 100px;
+    margin-top: 50px;
+    padding-right: 30px;
+    margin-bottom: 20px;
+}
+
+.next-btns {
+    width: 200px;
+    height: 50px;
+}

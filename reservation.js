@@ -35,27 +35,27 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
 
             //เพิ่มเช็คจ่ายตังไม่สำเร็จ
 
-            console.log(reservation["booking_reference"]);
-            console.log(reservation["flight_instance_list"]["departing_flight"]);
-
             const booking_ref = document.getElementById("booking_reference");
             const book_element = document.createElement("div");
             book_element.innerHTML = `
-                <label>booking reference : ${reservation["booking_reference"]}</label>
+                <label>Booking Reference : ${reservation["booking_reference"]}</label>
             `;
             booking_ref.appendChild(book_element);
 
             const depart = document.getElementById("depart");
             const depat_element = document.createElement("div");
                 depat_element.innerHTML = `
-                    <div class="text-center">
-                        <label>From : ${reservation["flight_instance_list"]["departing_flight"]["from"]}</label><br>
-                        <label>To : ${reservation["flight_instance_list"]["departing_flight"]["to"]}</label><br>
-                        <label>Date : ${reservation["flight_instance_list"]["departing_flight"]["date"]}</label><br>
-                        <label>Flight number : ${reservation["flight_instance_list"]["departing_flight"]["flight_number"]}</label><br>
-                        <label>Time : ${reservation["flight_instance_list"]["departing_flight"]["departure_time"]} - ${reservation["flight_instance_list"]["departing_flight"]["arrival_time"]}</label><br>
-                        <label>Aircraft : ${reservation["flight_instance_list"]["departing_flight"]["aircraft_number"]}</label><br>
-                    </div>
+                        <label class="label-title">
+                            Depart
+                        </label>
+                        <div class="text-center">
+                            <label>From : ${reservation["flight_instance_list"]["departing_flight"]["from"]}</label><br>
+                            <label>To : ${reservation["flight_instance_list"]["departing_flight"]["to"]}</label><br>
+                            <label>Date : ${reservation["flight_instance_list"]["departing_flight"]["date"]}</label><br>
+                            <label>Flight number : ${reservation["flight_instance_list"]["departing_flight"]["flight_number"]}</label><br>
+                            <label>Time : ${reservation["flight_instance_list"]["departing_flight"]["departure_time"]} - ${reservation["flight_instance_list"]["departing_flight"]["arrival_time"]}</label><br>
+                            <label>Aircraft : ${reservation["flight_instance_list"]["departing_flight"]["aircraft_number"]}</label><br>
+                        </div>
                 `;
             depart.appendChild(depat_element);
             
@@ -63,11 +63,14 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
                 const return_flight = document.getElementById("return");
                 const return_element = document.createElement("div");
                     return_element.innerHTML = `
-                        <div class="text-center">
+                        <label class="label-title">
+                            Return
+                        </label>
+                        <div>
                             <label>From : ${reservation["flight_instance_list"]["returning_flight"]["from"]}</label><br>
                             <label>To : ${reservation["flight_instance_list"]["returning_flight"]["to"]}</label><br>
                             <label>Date : ${reservation["flight_instance_list"]["returning_flight"]["date"]}</label><br>
-                            <label>Flight_number : ${reservation["flight_instance_list"]["returning_flight"]["flight_number"]}</label><br>
+                            <label>Flight number : ${reservation["flight_instance_list"]["returning_flight"]["flight_number"]}</label><br>
                             <label>Time : ${reservation["flight_instance_list"]["returning_flight"]["departure_time"]} - ${reservation["flight_instance_list"]["returning_flight"]["arrival_time"]}</label><br>
                             <label>Aircraft : ${reservation["flight_instance_list"]["returning_flight"]["aircraft_number"]}</label><br>
                         </div>
@@ -79,6 +82,7 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
             // console.log(reservation.passenger_list.length)
             const passenger = document.getElementById('passenger');
             const all_passenger = reservation["passenger_list"];
+            
             all_passenger.forEach(data => {
                 const passenger_element = document.createElement("div");
                 if (data["_User__middle_name"]){
@@ -89,7 +93,7 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
                         </div> 
                 
                     `;
-                }else{
+                } else {
                     passenger_element.innerHTML = `
             
                         <div>
@@ -106,8 +110,8 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
             const transaction_element = document.createElement("div");
                 transaction_element.innerHTML = `
                     <div class="text-center">
-                        <label>pay by : ${reservation["transaction"]["_Transaction__payment_method"]}</label><br>
-                        <label>time : ${reservation["transaction"]["_Transaction__paid_time"]}</label>
+                        <label>Pay by : ${reservation["transaction"]["_Transaction__payment_method"]}</label><br>
+                        <label>Time : ${reservation["transaction"]["_Transaction__paid_time"]}</label>
                     </div>
                 `;
             transaction_data.appendChild(transaction_element);
@@ -118,7 +122,9 @@ async function get_reservation(select_flight, passenger_list, select_seats) {
 
         } catch (error) {
             console.error('Error:', error);
-        }    
+    }    
+}
 
-
+function to_home() {
+    document.location.href = "index.html";
 }

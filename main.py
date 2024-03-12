@@ -284,7 +284,7 @@ class Reservation:
         flight_instance_index = self.__flight_instance_list.index(flight_instance)
         chosen_seat_amount = len(self.__flight_seat_list[flight_instance_index])
         passenger_amount = len(self.__passenger_list)
-        for i in range(chosen_seat_amount, passenger_amount+1):
+        for amount in range(chosen_seat_amount, passenger_amount):
             while(True):
                 random_seat = random.choice(flight_instance.flight_seat_list)
                 if random_seat.occupied == False and random_seat.seat_category.seat_category_name == "normal_seat":
@@ -356,8 +356,8 @@ class User:
         return self.__last_name
 
 class Passenger(User):
-    def __init__(self, title, first_name, last_name, birthday, phone_number = None, email = None, middle_name = None):
-        super().__init__(title, first_name, last_name, birthday, phone_number = None, email = None, middle_name = None)
+    def __init__(self, title, first_name, last_name, birthday, phone_number, email, middle_name) :
+        super().__init__(title, first_name, last_name, birthday, phone_number, email, middle_name)
         self.__service_list = []
 
     @property
@@ -366,6 +366,7 @@ class Passenger(User):
     
     def add_service(self, service):
         self.__service_list.append(service)
+
 class Admin(User):
     pass
 
@@ -549,7 +550,7 @@ class Qr(PaymentMethod):
 
 class Transaction:
     def __init__(self, payment_method:PaymentMethod):
-        self.__paid_time = datetime.now()
+        self.__paid_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         self.__payment_method = payment_method.__class__.__name__
 
 class Service:
