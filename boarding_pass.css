@@ -8,3 +8,14 @@
   padding-left: 120px;
   height: 80px;
 }
+
+.container {
+  background-color: chartreuse;
+  border-radius: 25px;
+  padding: 20px;
+}
+
+.boarding_pass {
+  background-color: brown;
+  padding: 20px;
+}

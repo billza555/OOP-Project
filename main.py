@@ -101,6 +101,8 @@ class AirportSystem:
     
     def show_unpaid_reservation_cost(self, flight_instance_list, passenger_list, flight_seats_list):
         reservation = self.create_reservation_for_paid(flight_instance_list, passenger_list, flight_seats_list, False)
+        if isinstance(reservation, str):
+            return "Normal Seat Full for People not select"
         if reservation:
             reservation_cost = reservation.calculate_total_cost()
             return reservation_cost
@@ -136,6 +138,16 @@ class AirportSystem:
         #                                        /\              /\
         #                                     departing       returning
         
+        for index,flight_instance in enumerate(reservation.flight_instances_list):
+            amount_normal_seat = 0
+            for seat_number in flight_seats_list[index]:
+                if flight_instance.get_flight_seat(seat_number).seat_category.seat_category_name == "normal_seat":
+                    amount_normal_seat += 1
+            print("จำนวนที่" + str(flight_instance.amount_of_normal_seats_available))
+            print("เลือก" + str(amount_normal_seat + len(passenger_list) - len(flight_seats_list[index])))
+            if flight_instance.amount_of_normal_seats_available < amount_normal_seat + len(passenger_list) - len(flight_seats_list[index]):
+                return "Normal seats are all full"
+            
         
         new_flight_seat_list = []
         
@@ -155,10 +167,21 @@ class AirportSystem:
                 
                 if mark_seats_as_occupied:
                     flight_seat.occupied = True
+                    if flight_seat.seat_category.seat_category_name == "normal_seat":
+                        print("จำนวนที่" + str(flight_instance.amount_of_normal_seats_available))
+                        print("เลือก" + str(amount_normal_seat + len(passenger_list) - len(flight_seats_list[index])))
+                        flight_instance.decrease_amount_of_normal_seats_available(1)
                     
                 sub_list_of_flight_seats.append(flight_seat)
             
             new_flight_seat_list.append(sub_list_of_flight_seats)
+
+        if mark_seats_as_occupied:
+            for index,flight_instance in enumerate(reservation.flight_instances_list):
+                flight_instance.decrease_amount_of_normal_seats_available(len(passenger_list) - len(flight_seats_list[index]))
+                print("เลือกแต่ไม่เช็คอิน")
+                print("จำนวนที่" + str(flight_instance.amount_of_normal_seats_available))
+                print("เลือก" + str(amount_normal_seat + len(passenger_list) - len(flight_seats_list[index])))
 
         reservation.flight_seat_list = new_flight_seat_list
         return reservation
@@ -223,7 +246,7 @@ class Reservation:
     def boarding_passes_list(self):
         return self.__boarding_passes_list
     
-    def add_passenger(self, title, first_name, last_name, birthday, phone_number = None, email = None, middle_name = None):
+    def add_passenger(self, title, first_name, last_name, birthday, phone_number, email, middle_name):
         passenger = Passenger(title, first_name, last_name, birthday, phone_number, email, middle_name)
         self.__passenger_list.append(passenger)
     
@@ -273,7 +296,7 @@ class Reservation:
         for passenger in self.__passenger_list:
             for service in passenger.service_list:
                 services_cost += service.total_cost
-                
+
         self.__total_cost = flight_instances_cost + flight_seats_cost + services_cost
         return {"flight_instances_cost": flight_instances_cost,
                 "flight_seats_cost": flight_seats_cost,
@@ -356,8 +379,8 @@ class User:
         return self.__last_name
 
 class Passenger(User):
-    def __init__(self, title, first_name, last_name, birthday, phone_number, email, middle_name) :
-        super().__init__(title, first_name, last_name, birthday, phone_number, email, middle_name)
+    def __init__(self, title, first_name, last_name, birthday, phone_number = None, email = None, middle_name = None):
+        super().__init__(title, first_name, last_name, birthday, phone_number = None, email = None, middle_name = None)
         self.__service_list = []
 
     @property
@@ -366,7 +389,6 @@ class Passenger(User):
     
     def add_service(self, service):
         self.__service_list.append(service)
-
 class Admin(User):
     pass
 
@@ -410,6 +432,7 @@ class FlightInstance(Flight):
         self.__aircraft = aircraft
         self.__date = date
         self.__cost = int(cost)
+        self.__amount_of_normal_seats_available = self.get_amount_of_normal_seats()
     
     @property
     def flight_number(self):
@@ -438,6 +461,10 @@ class FlightInstance(Flight):
     @property
     def flight_seat_list(self):
         return self.__flight_seat_list
+    
+    @property
+    def amount_of_normal_seats_available(self):
+        return self.__amount_of_normal_seats_available
 
     def get_flight_seat(self, seat_number):
         for flight_seat in self.__flight_seat_list:
@@ -450,6 +477,16 @@ class FlightInstance(Flight):
                 "flight_number": self.flight_number,
                 "aircraft_number": self.aircraft.aircraft_number,
                 "cost": self.cost}
+    
+    def get_amount_of_normal_seats(self):
+        amount = 0
+        for flight_seat in self.__flight_seat_list:
+            if flight_seat.seat_category.seat_category_name == "normal_seat":
+                amount += 1
+        return amount
+    
+    def decrease_amount_of_normal_seats_available(self, amount):
+        self.__amount_of_normal_seats_available -= amount
     
 class Aircraft:
     def __init__(self, aircraft_number):

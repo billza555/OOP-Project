@@ -35,15 +35,20 @@ async function get_pay_page(select_flight, passenger_list, select_seats) {
 
         console.log(transaction);
 
+        if (transaction === "Normal Seat Full for People not select") {
+            if (localStorage.getItem('type') === 'one_way') {
+                document.getElementById('cost').style.display = 'none'; 
+                go_back_to_select_flight_one_way();
+            } else {
+                document.getElementById('cost').style.display = 'none';
+                go_back_to_select_flight();
+            }
+        }
+
         localStorage.setItem('flight_instances_cost', transaction["flight_instances_cost"]);
         localStorage.setItem('flight_seats_cost', transaction["flight_seats_cost"]);
         localStorage.setItem('services_cost', transaction["services_cost"]);
         localStorage.setItem('total_cost', transaction["total_cost"]);
-
-            // flight_instances_cost : 3000
-            // flight_seats_cost : 400
-            // services_cost : 0
-            // total_cost : 3400
 
         const transaction_container = document.getElementById("transaction");
         const element = document.createElement("div");
@@ -61,4 +66,14 @@ async function get_pay_page(select_flight, passenger_list, select_seats) {
         } catch (error) {
             console.error('Error:', error);
         }    
+}
+
+function go_back_to_select_flight_one_way() {
+    document.location.href = "select_flight_oneway.html";
+    alert("Normal Seat Full for People not select .Please select a seat or choose a new flight file.");
+}
+
+function go_back_to_select_flight() {
+    document.location.href = "select_flight.html";
+    alert("Normal Seat Full for People not select Please select a seat or choose a new flight file.");
 }

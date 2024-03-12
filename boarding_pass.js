@@ -11,11 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
 async function get_boarding_pass(booking_ref, last_name) {
     const data = {"booking_reference": booking_ref,
                   "last_name": last_name}
-    new_url = api + "/check_in?booking_reference=" + booking_ref + "&last_name=" + last_name
-    console.log(data)
 
     try {
-        const response = await fetch(new_url, {
+        const response = await fetch(`${api}/check_in?booking_reference=${booking_ref}&last_name=${last_name}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
