@@ -23,7 +23,7 @@
 
 .container-one-way {
     margin: 130px;
-    background-color: #25ffff;
+    background-color: #ffcc00;
     height: 350px;
     border-radius: 35px;
 }
@@ -97,11 +97,14 @@
     background-color: #18b200;
     border-radius: 25px;
     color: #fff;
+    outline: none;
+    border: none;
 }
 
 .submit-btn:hover {
     background-color: #18b200;
     color: #fff;
+      
 }
 
 .submit {

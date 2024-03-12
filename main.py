@@ -143,8 +143,6 @@ class AirportSystem:
             for seat_number in flight_seats_list[index]:
                 if flight_instance.get_flight_seat(seat_number).seat_category.seat_category_name == "normal_seat":
                     amount_normal_seat += 1
-            print("จำนวนที่" + str(flight_instance.amount_of_normal_seats_available))
-            print("เลือก" + str(amount_normal_seat + len(passenger_list) - len(flight_seats_list[index])))
             if flight_instance.amount_of_normal_seats_available < amount_normal_seat + len(passenger_list) - len(flight_seats_list[index]):
                 return "Normal seats are all full"
             
@@ -168,8 +166,6 @@ class AirportSystem:
                 if mark_seats_as_occupied:
                     flight_seat.occupied = True
                     if flight_seat.seat_category.seat_category_name == "normal_seat":
-                        print("จำนวนที่" + str(flight_instance.amount_of_normal_seats_available))
-                        print("เลือก" + str(amount_normal_seat + len(passenger_list) - len(flight_seats_list[index])))
                         flight_instance.decrease_amount_of_normal_seats_available(1)
                     
                 sub_list_of_flight_seats.append(flight_seat)
@@ -179,9 +175,6 @@ class AirportSystem:
         if mark_seats_as_occupied:
             for index,flight_instance in enumerate(reservation.flight_instances_list):
                 flight_instance.decrease_amount_of_normal_seats_available(len(passenger_list) - len(flight_seats_list[index]))
-                print("เลือกแต่ไม่เช็คอิน")
-                print("จำนวนที่" + str(flight_instance.amount_of_normal_seats_available))
-                print("เลือก" + str(amount_normal_seat + len(passenger_list) - len(flight_seats_list[index])))
 
         reservation.flight_seat_list = new_flight_seat_list
         return reservation
@@ -227,7 +220,6 @@ class Reservation:
     
     @flight_seat_list.setter
     def flight_seat_list(self, flight_seat_list):
-        print(flight_seat_list)
         self.__flight_seat_list = flight_seat_list
     
     @property
@@ -314,6 +306,7 @@ class Reservation:
                     random_seat.occupied = True
                     self.__flight_seat_list[flight_instance_index].append(random_seat)
                     break
+        return "success"
     
     def get_reservation_info_for_showing(self):
         reservation_info = {}
@@ -353,7 +346,7 @@ class Reservation:
         return boarding_pass_list
     
 class User:
-    def __init__(self, title, first_name, last_name, birthday, phone_number = None, email = None, middle_name = None):
+    def __init__(self, title, first_name, last_name, birthday, phone_number, email , middle_name):
         self.__title = title
         self.__first_name = first_name
         self.__middle_name = middle_name
@@ -379,8 +372,8 @@ class User:
         return self.__last_name
 
 class Passenger(User):
-    def __init__(self, title, first_name, last_name, birthday, phone_number = None, email = None, middle_name = None):
-        super().__init__(title, first_name, last_name, birthday, phone_number = None, email = None, middle_name = None)
+    def __init__(self, title, first_name, last_name, birthday, phone_number , email , middle_name):
+        super().__init__(title, first_name, last_name, birthday, phone_number , email, middle_name)
         self.__service_list = []
 
     @property

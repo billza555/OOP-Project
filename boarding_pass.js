@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 async function get_boarding_pass(booking_ref, last_name) {
-    const data = {"booking_reference": booking_ref,
-                  "last_name": last_name}
+    
+    // const data = {"booking_reference": booking_ref,
+    //               "last_name": last_name}
 
     try {
         const response = await fetch(`${api}/check_in?booking_reference=${booking_ref}&last_name=${last_name}`, {
@@ -33,18 +34,18 @@ async function get_boarding_pass(booking_ref, last_name) {
         response_data.forEach(data => {
             const element = document.createElement("div");
             element.innerHTML = `
-            <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Boarding Pass</h5>
-                <p class="card-text">name : ${data._BoardingPass__passenger_name}</p>
-                <p class="card-text">flight number : ${data._BoardingPass__flight_number}</p>
-                <p class="card-text">date : ${data._BoardingPass__departure_date}</p>
-                <p class="card-text">from : ${data._BoardingPass__starting_location}</p>
-                <p class="card-text">to : ${data._BoardingPass__destination}</p>
-                <p class="card-text">seat : ${data._BoardingPass__flight_seat_number}</p>
-                <p class="card-text">aircraft : ${data._BoardingPass__aircraft_number}</p>
-                <p class="card-text">booking reference : ${data._BoardingPass__booking_reference}</p>
-            </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Boarding Pass</h5>
+                    <p class="card-text">Name : ${data._BoardingPass__passenger_name}</p>
+                    <p class="card-text">Flight number : ${data._BoardingPass__flight_number}</p>
+                    <p class="card-text">Date : ${data._BoardingPass__departure_date}</p>
+                    <p class="card-text">From : ${data._BoardingPass__starting_location}</p>
+                    <p class="card-text">To : ${data._BoardingPass__destination}</p>
+                    <p class="card-text">Seat : ${data._BoardingPass__flight_seat_number}</p>
+                    <p class="card-text">Aircraft : ${data._BoardingPass__aircraft_number}</p>
+                    <p class="card-text">Booking reference : ${data._BoardingPass__booking_reference}</p>
+                </div>
             </div>
             `;
             showing_boarding_pass.appendChild(element);
@@ -53,4 +54,8 @@ async function get_boarding_pass(booking_ref, last_name) {
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+function to_home() {
+    document.location.href = 'index.html'
 }
