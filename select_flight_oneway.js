@@ -18,6 +18,11 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date) 
         const response_data = await response.json();
         console.log("Response data : ", response_data)
 
+        if (response_data[0].length === 0) {
+            alert("Have no flight in this day");
+            document.location.href = "index.html";
+        }
+
         const depart_flight_data = response_data[0];
 
         // console.log("Depart_flight_data", depart_flight_data)

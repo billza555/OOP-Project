@@ -76,12 +76,13 @@ function search_flights() {
             alert("Please enter complete information.");
       
       } else {    
+
             localStorage.setItem('input_from', JSON.stringify(input_from));
             localStorage.setItem('input_to', JSON.stringify(input_to));
             localStorage.setItem('input_depart_date', JSON.stringify(input_depart_date));
             localStorage.setItem('passenger_num', JSON.stringify(passenger_num));
             localStorage.setItem('type', 'one_way');
 
-            document.location.href = "select_flight.html";
+            document.location.href = "select_flight_oneway.html";
       }
 }

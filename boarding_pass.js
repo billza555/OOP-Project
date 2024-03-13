@@ -25,7 +25,7 @@ async function get_boarding_pass(booking_ref, last_name) {
         const response_data = await response.json();
         console.log(response_data);
         
-        if (response_data === null) {
+        if (response_data === null || response_data.length === 0) {
 
             document.getElementById('container').style.display = 'none';
             
@@ -60,4 +60,8 @@ async function get_boarding_pass(booking_ref, last_name) {
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+function to_home() {
+    document.location.href = "index.html"
 }

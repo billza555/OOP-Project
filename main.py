@@ -624,17 +624,64 @@ nokair = AirportSystem()
 nokair.airport_list.append(Airport("Don Mueang", "DMK"))
 nokair.airport_list.append(Airport("Chiang Mai", "CNX"))
 nokair.airport_list.append(Airport("Phuket", "HKT"))
-nokair.airport_list.append(Airport("Hat Yai", "HDY"))
-nokair.flight_list.append(Flight(nokair.airport_list[0], nokair.airport_list[1]))
-nokair.flight_list.append(Flight(nokair.airport_list[1], nokair.airport_list[0]))
+
+nokair.flight_list.append(Flight(nokair.airport_list[0], nokair.airport_list[1])) # 0 : 0 --> 1
+nokair.flight_list.append(Flight(nokair.airport_list[1], nokair.airport_list[0])) # 1 : 1 --> 0
+
+nokair.flight_list.append(Flight(nokair.airport_list[0], nokair.airport_list[2])) # 2 : 0 --> 2 
+nokair.flight_list.append(Flight(nokair.airport_list[2], nokair.airport_list[0])) # 3 : 2 --> 0
+
+nokair.flight_list.append(Flight(nokair.airport_list[1], nokair.airport_list[2])) # 4 : 1 --> 2
+nokair.flight_list.append(Flight(nokair.airport_list[2], nokair.airport_list[1])) # 5 : 2 --> 1
 
 nokair.aircraft_list.append(Aircraft("101"))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F1", "8:00", "10:00", nokair.aircraft_list[0], "2024-03-08", 1000))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F2", "10:00", "12:00", nokair.aircraft_list[0], "2024-03-09", 1000))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F3", "11:00", "13:00", nokair.aircraft_list[0], "2024-03-08", 2000))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F4", "14:00", "15:00", nokair.aircraft_list[0], "2024-03-09", 2000))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F5", "20:00", "22:00", nokair.aircraft_list[0], "2024-03-08", 800))
-nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F6", "20:00", "22:00", nokair.aircraft_list[0], "2024-03-09", 800))
+nokair.aircraft_list.append(Aircraft("102"))
+nokair.aircraft_list.append(Aircraft("103"))
+
+# 0 --> 1 / 1 --> 0
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F1", "8:00", "10:00", nokair.aircraft_list[0], "2024-03-13", 1000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F3", "11:00", "13:00", nokair.aircraft_list[0], "2024-03-13", 2000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F5", "20:00", "22:00", nokair.aircraft_list[0], "2024-03-13", 800))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F1", "8:00", "10:00", nokair.aircraft_list[0], "2024-03-14", 1300))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F3", "11:00", "13:00", nokair.aircraft_list[0], "2024-03-14", 2100))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F5", "20:00", "22:00", nokair.aircraft_list[0], "2024-03-14", 800))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F1", "8:00", "10:00", nokair.aircraft_list[0], "2024-03-15", 1300))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F3", "11:00", "13:00", nokair.aircraft_list[0], "2024-03-15", 2400))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[0], "F5", "20:00", "22:00", nokair.aircraft_list[0], "2024-03-15", 2800))
+
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F2", "10:00", "12:00", nokair.aircraft_list[0], "2024-03-14", 1000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F4", "14:00", "15:00", nokair.aircraft_list[0], "2024-03-14", 2000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F6", "20:00", "22:00", nokair.aircraft_list[0], "2024-03-14", 800))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F2", "10:00", "12:00", nokair.aircraft_list[0], "2024-03-15", 1200))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F4", "14:00", "15:00", nokair.aircraft_list[0], "2024-03-15", 2200))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[1], "F6", "20:00", "22:00", nokair.aircraft_list[0], "2024-03-15", 1000))
+
+# 0 --> 2 / 2 --> 0
+#  something error 
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[2], "G1", "8:00", "10:00", nokair.aircraft_list[1], "2024-03-13", 1200))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[2], "G3", "11:00", "13:00", nokair.aircraft_list[1], "2024-03-13", 2600))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[2], "G5", "20:00", "22:00", nokair.aircraft_list[1], "2024-03-13", 1560))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[2], "G1", "8:00", "10:00", nokair.aircraft_list[1], "2024-03-14", 1100))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[2], "G3", "11:00", "13:00", nokair.aircraft_list[1], "2024-03-14", 2800))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[2], "G5", "20:00", "22:00", nokair.aircraft_list[1], "2024-03-14", 1600))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[2], "G1", "8:00", "10:00", nokair.aircraft_list[1], "2024-03-15", 1700))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[2], "G3", "11:00", "13:00", nokair.aircraft_list[1], "2024-03-15", 2350))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[2], "G5", "20:00", "22:00", nokair.aircraft_list[1], "2024-03-15", 1970))
+
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[3], "G2", "10:00", "12:00", nokair.aircraft_list[1], "2024-03-14", 1510))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[3], "G4", "14:00", "15:00", nokair.aircraft_list[1], "2024-03-14", 2100))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[3], "G6", "20:00", "22:00", nokair.aircraft_list[1], "2024-03-14", 3000))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[3], "G2", "10:00", "12:00", nokair.aircraft_list[1], "2024-03-15", 1390))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[3], "G4", "14:00", "15:00", nokair.aircraft_list[1], "2024-03-15", 2760))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[3], "G6", "20:00", "22:00", nokair.aircraft_list[1], "2024-03-15", 3210))
+
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[4], "H1", "8:00", "10:00", nokair.aircraft_list[2], "2024-03-13", 1200))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[4], "H3", "11:00", "13:00", nokair.aircraft_list[2], "2024-03-13", 2300))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[4], "H5", "20:00", "22:00", nokair.aircraft_list[2], "2024-03-13", 1900))
+
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[5], "H2", "10:00", "12:00", nokair.aircraft_list[2], "2024-03-14", 1310))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[5], "H4", "14:00", "15:00", nokair.aircraft_list[2], "2024-03-14", 2500))
+nokair.flight_instance_list.append(FlightInstance(nokair.flight_list[5], "H6", "20:00", "22:00", nokair.aircraft_list[2], "2024-03-14", 3200))
 
 nokair.service_list = Insurance("Insurance", 100)
 nokair.service_list = Baggage("+5kg Baggage", 100, 5)

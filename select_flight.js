@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', function () {
 async function show_flight(new_input_from, new_input_to, new_input_depart_date, new_input_return_date) {
    
     try {
+
+        console.log(new_input_from)
+        console.log(new_input_to)
+        console.log(new_input_depart_date)
+        console.log(new_input_return_date)
+
         const response = await fetch(`${api}/flight_instance_matches?starting_location=${new_input_from}&destination=${new_input_to}&depart_date=${new_input_depart_date}&return_date=${new_input_return_date}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -19,6 +25,11 @@ async function show_flight(new_input_from, new_input_to, new_input_depart_date, 
 
         const response_data = await response.json();
         console.log("Response data : ", response_data)
+
+        if (response_data[0].length === 0 || response_data[1].length === 0) {
+            alert("Have no flight in this day");
+            document.location.href = "index.html";
+        }
 
         const depart_flight_data = response_data[0];
         const return_flight_data = response_data[1];
